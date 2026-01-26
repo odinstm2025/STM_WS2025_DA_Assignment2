@@ -3,3 +3,5 @@ export/*
 
 # Keep this file
 !export/.gitkeep
+!export/*.html
+!export/*.md
