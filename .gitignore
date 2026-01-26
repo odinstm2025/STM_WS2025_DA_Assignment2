@@ -5,3 +5,7 @@ export/*
 !export/.gitkeep
 !export/*.html
 !export/*.md
+
+# Re-include the files directory
+!export/Assignment2_HourlyPowerGenerationofEurope_files/
+!export/Assignment2_HourlyPowerGenerationofEurope_files/*.png
