@@ -1,0 +1,14 @@
+# Project requirements
+# Versions are intentionally not pinned to ensure compatibility
+# across different environments and grading systems.
+
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+scikit-learn
+statsmodels
+jupyter
+ipykernel
+tqdm

@@ -1,0 +1,5 @@
+# Ignore all files in export directory
+export/*
+
+# Keep this file
+!export/.gitkeep

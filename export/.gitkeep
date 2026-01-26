@@ -1,0 +1,17 @@
+# Ignore everything in export by default
+export/*
+
+# Keep HTML and Markdown exports
+!export/*.html
+!export/*.md
+
+# Keep images folder (e.g. from nbconvert HTML)
+!export/Assignment2_HourlyPowerGenerationofEurope_files/
+!export/Assignment2_HourlyPowerGenerationofEurope_files/**
+
+# Explicitly ignore Python and LaTeX exports
+export/*.py
+export/*.tex
+
+# Keep placeholder file
+!export/.gitkeep
