@@ -1,21 +1,34 @@
 #!/usr/bin/env bash
 
+set -e  # fail fast on errors
+
 # ===== Copy Jupyter File =====
-cp ~/OneDrive/Courses/STM_WS2025_DA_Data\ Analysis/Assignment_2/Assignment2_HourlyPowerGenerationofEurope.ipynb ~/workspace/STM_WS2025_DA_Assignment2/Assignment2_HourlyPowerGenerationofEurope.ipynb
+cp ~/OneDrive/Courses/STM_WS2025_DA_Data\ Analysis/Assignment_2/Assignment2_HourlyPowerGenerationofEurope.ipynb \
+   ~/workspace/STM_WS2025_DA_Assignment2/Assignment2_HourlyPowerGenerationofEurope.ipynb
 
 # ===== Configuration =====
 NOTEBOOK="Assignment2_HourlyPowerGenerationofEurope.ipynb"
+BASENAME="${NOTEBOOK%.ipynb}"
 OUTPUT_DIR="./export"
+
+LATEX_FILE="${OUTPUT_DIR}/${BASENAME}.tex"
+LATEX_NOPYP_FILE="${OUTPUT_DIR}/${BASENAME}_no_python.tex"
 
 # ===== Ensure output directory exists =====
 mkdir -p "$OUTPUT_DIR"
 
-# ===== Commands =====
-
+# ===== Export formats =====
 jupyter nbconvert --to markdown "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
-jupyter nbconvert --to html "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
 jupyter nbconvert --to python "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
 jupyter nbconvert --to latex "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
+# jupyter nbconvert --to html  --clear-output --no-input "$NOTEBOOK"  --output-dir="$OUTPUT_DIR"
+# jupyter nbconvert --to html --template external_images --FilesWriter.build_directory=notebook_files --output notebook.html "$NOTEBOOK"
 
+# ===== Remove Python code blocks (Highlighting) BEFORE cleaning =====
+sed '/\\begin{Verbatim}/,/\\end{Verbatim}/d' "$LATEX_FILE" > "$LATEX_NOPYP_FILE"
+
+# ===== Clean notebook AFTER exports =====
 nbstripout "$NOTEBOOK"
-#To see all available configurables, use `--help-all`.
+
+echo "LaTeX without Python code written to:"
+echo "  $LATEX_NOPYP_FILE"
