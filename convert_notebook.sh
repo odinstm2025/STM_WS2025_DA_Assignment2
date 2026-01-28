@@ -2,10 +2,6 @@
 
 set -e  # fail fast on errors
 
-# ===== Copy Jupyter File =====
-cp ~/OneDrive/Courses/STM_WS2025_DA_Data\ Analysis/Assignment_2/Assignment2_HourlyPowerGenerationofEurope.ipynb \
-   ~/workspace/STM_WS2025_DA_Assignment2/Assignment2_HourlyPowerGenerationofEurope.ipynb
-
 # ===== Configuration =====
 NOTEBOOK="Assignment2_HourlyPowerGenerationofEurope.ipynb"
 BASENAME="${NOTEBOOK%.ipynb}"
