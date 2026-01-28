@@ -17,8 +17,11 @@ mkdir -p "$OUTPUT_DIR"
 jupyter nbconvert --to markdown "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
 jupyter nbconvert --to python "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
 jupyter nbconvert --to latex "$NOTEBOOK" --output-dir="$OUTPUT_DIR"
+jupyter nbconvert --to html   --no-input "$NOTEBOOK"  --output-dir="$OUTPUT_DIR"
 # jupyter nbconvert --to html  --clear-output --no-input "$NOTEBOOK"  --output-dir="$OUTPUT_DIR"
 # jupyter nbconvert --to html --template external_images --FilesWriter.build_directory=notebook_files --output notebook.html "$NOTEBOOK"
+# jupyter nbconvert --to html --template external_images --FilesWriter.build_directory="$OUTPUT_DIR" --output "$BASENAME.html" "$NOTEBOOK" --template-path="./templates"
+
 
 # ===== Remove Python code blocks (Highlighting) BEFORE cleaning =====
 sed '/\\begin{Verbatim}/,/\\end{Verbatim}/d' "$LATEX_FILE" > "$LATEX_NOPYP_FILE"

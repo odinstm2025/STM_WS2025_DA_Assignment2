@@ -1,9 +1,29 @@
 # Team Format and Dataset
 
-## 1. Team
+## 1. Team formation and dataset
+
+### 1.1 Contributions
 
 - Oswald Lackner
+    - Initial python script setup
+    - Plot activation
+    - Column data managment
+    - Import of raw data from CSV-files
+    - Dataset overview
+    - Data processing pipline (cleaning, outlier)
+        - Hexbin raw data visualisation
+            - Hours of day
+            - Days a week
+            - days a year
+        - Outlier removal
 - Stocker Christoph
+    - Basic statistical analysis
+    - Original data quality analysis with visualization
+        - Checking Dataset Time Ranges
+        - Generating Combined Missingness diagramm
+        - Generating Combined Timestamp Gap Analysis
+        - Generating Combined Outlier Analysis
+        - Generating Logical Consistency Check
 
 Source of Data: [Kaggle: Hourly Power Generation of Europe](https://www.kaggle.com/datasets/mehmetnuryildirim/hourly-power-generation-of-europe) (date: 2026-01-16)
 
@@ -48,7 +68,7 @@ from enum import Enum, auto
 import calendar
 from typing import Iterable, Tuple, Dict, Union
 import matplotlib.colors as mcolors
-
+import pprint
 
 
 
@@ -122,7 +142,7 @@ class ActvnMatrix:
 
 
     @classmethod
-    def is_active(cls, country, plot_option) -> bool:
+    def is_active(cls, country: str, plot_option: PlotOptions) -> bool:
         """
         Return True if the given country and plot_option are active.
         country can be:
@@ -133,7 +153,7 @@ class ActvnMatrix:
             - PlotOptions enum
         Prints messages if country or plot is inactive.
         """
-        country_str = country.name.capitalize()
+        country_str = country
         plot_str = plot_option.name
         # --- Check country ---
         if country_str not in cls.STATE:
@@ -812,7 +832,7 @@ for country in COUNTRIES:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3831355117.py:28: DtypeWarning: Columns (6) have mixed types. Specify dtype option on import or set low_memory=False.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3831355117.py:28: DtypeWarning: Columns (6) have mixed types. Specify dtype option on import or set low_memory=False.
       df = pd.read_csv(filepath)
 
 
@@ -2482,20 +2502,18 @@ for metric in metrics_to_show:
 def analyze_data_quality_combined(dataframes_list):
 
     print(f"\n{'='*80}")
-    print(f"COMBINED DATA QUALITY ANALYSIS (ALL COUNTRIES)")
+    print(f"Original data quality analysis")
     print(f"{'='*80}")
 
     # extract the names
     countries = [name for name, _ in dataframes_list]
-    # emty list to collect the final statistics
-    quality_summary = [] 
-    # dictionary to store the count of outliers
-    outlier_counts_total = {}
     
+
+    # ------------------------ time range ------------------------
     # check the ranges
-    # the measurement start dated of the countries are different
+    # the measurement start dates of the countries are different
     # thus the index has to be adapted
-    print("\n[0] Checking Dataset Time Ranges...")
+    print("\ncheck time range")
     range_data = []
     for country, df in dataframes_list:
         range_data.append({
@@ -2507,64 +2525,59 @@ def analyze_data_quality_combined(dataframes_list):
     # display the date information
     print(pd.DataFrame(range_data).set_index("Country"))
 
-    # ------------------------ 1 missingness patterns ------------------------
-    print("\n[1] Generating Combined Missingness diagramm...")
-    # added sharex=False to allow for different start/end dates
-    fig, axes = plt.subplots(nrows=len(dataframes_list), ncols=1, figsize=(15, 5*len(dataframes_list)), sharex=False)
-    if len(dataframes_list) == 1: axes = [axes]
 
-    #   generate the height and pairs the plot with the corresponding data
+    # ------------------------ missingness diagram ------------------------
+    print("\nmissingness diagram")
+    # Added sharex=False to allow for different start/end dates
+    n_plots = len(dataframes_list)
+    fig, axes = plt.subplots(n_plots, 1, figsize=(15, 5*n_plots), sharex=False)
+    if n_plots == 1: axes = [axes]
+
+    # generate the height and pairs the plot with the corresponding data
     for ax, (country, df) in zip(axes, dataframes_list):
         sns.heatmap(
-            df.isnull().T,      # create a table for the mising data
+            df.isnull().T,      # create a table for the missing data
             ax=ax, 
             cbar=False,         # disable the legend
             cmap='viridis',     # set colors to yellow and purple (visibility)
             xticklabels=False, 
             yticklabels=True
-            )
+        )
         # set titles
         ax.set_title(f"{country} – Missing Data (Yellow = Missing)", fontsize=14, loc='left', pad=10)
         ax.tick_params(axis='y', rotation=0, labelsize=10)
-
+        
         # added display of start and end time (because of different start end end dates of the data)
         start_str = str(df.index.min().date())
         end_str = str(df.index.max().date())
         ax.set_xlabel(f"Timeline: {start_str} to {end_str}", fontsize=10, color='gray')
     
     # generate the plot
-    plt.suptitle("Missing Data Patterns Overview (Independent Timelines)", fontsize=16, y=1.01)
+    plt.suptitle("Missing Data Patterns Overview ", fontsize=16, y=1.01)
     plt.tight_layout()
     plt.show()
 
-    # ------------------------ 2 timestamp gaps ------------------------
-    print("\n[2] Generating Combined Timestamp Gap Analysis...")
+
+    # ------------------------ timestamp gaps ------------------------
+    print("\ncombined timestamp gap analysis")
     # excluded the code for timegap analysis
-    # (no timegaps found)
-    print("✓ No timestamp gaps found.")
+    print("No timestamp gaps found! (not regarding the different start dates)")
 
-    # ------------------------ 3 outliers (boxplots) ------------------------
-    print("\n[3] Generating Combined Outlier Analysis (All Power Sources)...")
-    # genereate list of colums of interest
+
+    # ------------------------ outliers (Boxplots) ------------------------
+    print("\ncombined outlier analysis (all power sources)")
+    # generate list of columns of interest
+    present_cols = set().union(*(df.columns for _, df in dataframes_list))
     check_list = Columns.Power.ALL + [Columns.CALC.TOTAL_POWER]
-    cols_to_plot = []
-    
-    present_cols = set()
-    for _, df in dataframes_list:
-        present_cols.update(df.columns)
-        
-    for col in check_list:
-        if col in present_cols:
-            cols_to_plot.append(col)
+    cols_to_plot = [c for c in check_list if c in present_cols]
 
-    # count of colums 
+    # count of columns 
     n_cols = 4
     # calculate rows
     n_rows = (len(cols_to_plot) + n_cols - 1) // n_cols
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 4 * n_rows))
     # convert 2D grid into a 1D List
     axes = axes.flatten()
-    
 
     for i, col_name in enumerate(cols_to_plot):
         ax = axes[i]
@@ -2572,16 +2585,9 @@ def analyze_data_quality_combined(dataframes_list):
         
         for country, df in dataframes_list:
             if col_name in df.columns:
-                # only plot the values (for the boxplot the timestamps arent interesting)
+                # only plot the values (for the boxplot the timestamps aren't interesting)
                 clean_values = df[col_name].values
                 plot_data.append(pd.DataFrame({'Country': country, 'Value': clean_values}))
-                # find the outlyers and mark tem in the plots
-                if col_name == Columns.CALC.TOTAL_POWER:
-                    data = df[col_name].dropna()
-                    Q1, Q3 = data.quantile(0.25), data.quantile(0.75)
-                    IQR = Q3 - Q1
-                    n_outliers = ((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).sum()
-                    outlier_counts_total[country] = n_outliers
 
         if plot_data:
             viz_df = pd.concat(plot_data, ignore_index=True)
@@ -2592,7 +2598,8 @@ def analyze_data_quality_combined(dataframes_list):
                 hue='Country', 
                 legend=False, 
                 ax=ax, 
-                palette=colors)
+                palette=colors
+            )
             ax.set_title(col_name, fontsize=11, fontweight='bold')
             ax.set_ylabel("MW")
             ax.set_xlabel("")
@@ -2603,58 +2610,35 @@ def analyze_data_quality_combined(dataframes_list):
     for j in range(len(cols_to_plot), len(axes)):
         axes[j].set_visible(False)
         
-    plt.suptitle("Distribution & Outliers Comparison (All Power Sources)", fontsize=16, y=1.002)
+    plt.suptitle("Distribution & Outliers Comparison ", fontsize=16, y=1.002)
     plt.tight_layout()
     plt.show()
 
-    # ------------------------ 4 consistency check ------------------------
+
+    # ------------------------ logical consistency check ------------------------
     print("\n[4] Generating Logical Consistency Check...")
     issue_counts = []
-    # count double timestamps
+    
     for country, df in dataframes_list:
+        # count double timestamps
         n_dupes = df.index.duplicated().sum()
         power_cols = [c for c in Columns.Power.ALL if c in df.columns]
-        # ckecks if there are som negative power values
+        # check if there are some negative power values
         n_negatives = (df[power_cols] < 0).sum().sum()
         
         issue_counts.append({'Country': country, 'Issue': 'Duplicate Rows', 'Count': n_dupes})
         issue_counts.append({'Country': country, 'Issue': 'Negative Values', 'Count': n_negatives})
-        
-        total_cells = df.size
-        missing_cells = df.isnull().sum().sum()
-        # collect missing percent, gaps, dublicate, negative
-        quality_summary.append({
-            'Country': country,
-            'Missing Values (Cells)': missing_cells,
-            'Missing %': round((missing_cells / total_cells) * 100, 4),
-            'Timestamp Gaps (>1h)': 0,
-            'Duplicate Rows': n_dupes,
-            'Negative Values': n_negatives,
-            'Total Power Outliers': outlier_counts_total.get(country, 0)
-        })
     
     issues_df = pd.DataFrame(issue_counts)
-    # plot dublicates and negatives side by side
+    
+    # plot duplicates and negatives side by side
     plt.figure(figsize=(12, 6))
     sns.barplot(data=issues_df, x='Country', y='Count', hue='Issue', palette='Reds')
     plt.title("Data Logic Errors: Duplicates & Inconsistent Units", fontsize=16)
-    # symlog adjusts the plot for small and large numbers
-    plt.yscale('symlog') 
     plt.grid(axis='y', alpha=0.3)
     plt.show()
-    
-    # ------------------------ 5  final summary ------------------------
-    print("\n" + "="*80)
-    print("FINAL DATA QUALITY REPORT SUMMARY")
-    print("="*80)
-    # creating the final table
-    summary_df = pd.DataFrame(quality_summary).set_index('Country')
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', 1000)
-    print(summary_df)
-    print("="*80)
 
-# execute the function
+# execution
 analyze_data_quality_combined(dataframes)
 ```
 
@@ -2816,7 +2800,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2839,7 +2823,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2849,7 +2833,7 @@ plot_hexbin_power_by_state_and_type(
     
 
 
-#### 2.1.4.3 Hexplots for raw data - days of the year
+#### 2.1.4.3 Hexplots for raw data - days of the week
 
 Hexplots are created for  which show the power production over the days of the week between start and end of the data.
 
@@ -2864,7 +2848,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2894,7 +2878,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2903,6 +2887,14 @@ plot_hexbin_power_by_state_and_type(
 ![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_29_1.png)
     
 
+
+Outlier removal was done by fixed upper and lower threshold for two reasons.
+1. The timely change of power generation to be seen in dayly, weekly patterns would lead to a removal of good data patterns by IQR.
+2. What kind of unwanted data was removed:
+    1. Zero power production within total power, not all countries have all types of power sources, but its very unlikely that power production was zero within this time frame.
+    2. Exrteme spikes in power production e.g. France 2022, January. Several spikes beyond doubled typical power production. According to internet sources (e.g. [Energy Terminal: France's 2022 electricity generation at lowest in 30 years: Report (27.01.2026)](https://www.aa.com.tr/en/energy/electricity/frances-2022-electricity-generation-at-lowest-in-30-years-report/37529?utm_source=chatgpt.com) france hat some maintanence activities for nuclear power plants and saw low production. This might have led to frequency variation in power grid, resulting in high load changes for individual power sources being able to vary the output fast. Taking possible differences in data recording latency, this could lead to spikes due to time shift. This is an asumption, furthermore network frequency data for january 2022 in france was not easily available on most commomn platforms at time of investigation.
+    3. For all other columns than the calculated total power sources a deep investigation would be necessary to validate the data quality.
+3. Data removal was done by removing whole lines of total power to be out of limits, leading to a total loss of lines around ~200 which is minor compaired to overall lines per dataset.
 
 
 ```python
@@ -2977,41 +2969,48 @@ def remove_outliers_by_fixed_threshold(
 
 POWER_THRESHOLDS = {
     "Italy": {
-        Columns.Power.SOLAR: (0, 120000),
-        Columns.Power.WIND_ONSHORE: (0, 150000),
-        Columns.Power.WIND_OFFSHORE: (0, 90000),
-        Columns.Power.NUCLEAR: (0, 100000),
-        Columns.Power.FOSSIL_GAS: (0, 200000),
+        # Columns.Power.SOLAR: (0, 120000),
+        # Columns.Power.WIND_ONSHORE: (0, 150000),
+        # Columns.Power.WIND_OFFSHORE: (0, 90000),
+        # Columns.Power.NUCLEAR: (0, 100000),
+        # Columns.Power.FOSSIL_GAS: (0, 200000),
         Columns.CALC.TOTAL_POWER: (10000, 50000)
     },
     "France": {
-        Columns.Power.SOLAR: (0, 100000),
-        Columns.Power.WIND_ONSHORE: (0, 180000),
-        Columns.Power.WIND_OFFSHORE: (0, 70000),
-        Columns.Power.NUCLEAR: (0, 120000),
-        Columns.Power.FOSSIL_GAS: (0, 160000),  
+        # Columns.Power.SOLAR: (0, 100000),
+        # Columns.Power.WIND_ONSHORE: (0, 180000),
+        # Columns.Power.WIND_OFFSHORE: (0, 70000),
+        # Columns.Power.NUCLEAR: (0, 120000),
+        # Columns.Power.FOSSIL_GAS: (0, 160000),  
+        # Columns.Power.FOSSIL_OIL: (0, 50000),
         Columns.CALC.TOTAL_POWER: (20000, 100000)
     },
     "Germany": {
-        Columns.Power.SOLAR: (0, 80000),
-        Columns.Power.WIND_ONSHORE: (0, 200000),
-        Columns.Power.WIND_OFFSHORE: (0, 60000),
-        Columns.Power.NUCLEAR: (0, 90000),
-        Columns.Power.FOSSIL_GAS: (0, 150000),
+        # Columns.Power.SOLAR: (0, 80000),
+        # Columns.Power.WIND_ONSHORE: (0, 200000),
+        # Columns.Power.WIND_OFFSHORE: (0, 60000),
+        # Columns.Power.NUCLEAR: (0, 90000),
+        # Columns.Power.FOSSIL_GAS: (0, 150000),
+        # Columns.Power.FOSSIL_COAL_DERIVED_GAS: (160, 650),
+        # Columns.Power.OTHER: (0, 12500),
         Columns.CALC.TOTAL_POWER: (20000, 150000)
     },
     "Spain": {
-        Columns.Power.SOLAR: (0, 90000),
-        Columns.Power.WIND_ONSHORE: (0, 160000),
-        Columns.Power.WIND_OFFSHORE: (0, 50000),
-        Columns.Power.NUCLEAR: (0, 80000),
-        Columns.Power.FOSSIL_GAS: (0, 140000),
+        # Columns.Power.SOLAR: (0, 90000),
+        # Columns.Power.WIND_ONSHORE: (0, 160000),
+        # Columns.Power.WIND_OFFSHORE: (0, 50000),
+        # Columns.Power.NUCLEAR: (0, 80000),
+        # Columns.Power.FOSSIL_GAS: (0, 140000),
+        # Columns.Power.FOSSIL_BROWN: (150, 100000),
         Columns.CALC.TOTAL_POWER: (15000, 110000)
     }
 }
 
 
+
 dataframes_filtered = []
+reports = []
+
 for country, df in dataframes:
     # if not ActvnMatrix.is_active(country, PlotOptions.OUTLIER_REMOVAL_FIXED_THRESHOLDS):
     #     continue
@@ -3022,7 +3021,56 @@ for country, df in dataframes:
         thresholds=POWER_THRESHOLDS[country]
     )
     dataframes_filtered.append((country, filtered_df))
+    reports.append(report)
+
+pprint.pp(reports)
 ```
+
+    [{'state': 'Italy',
+      'method': 'fixed_threshold',
+      'power_sources': {'total_power': {'min_threshold': 10000,
+                                        'max_threshold': 50000,
+                                        'total_points': 59070,
+                                        'removed': 23,
+                                        'removed_pct': 0.03893685457931268}},
+      'summary': {'rows_before': 59070,
+                  'rows_after': 59047,
+                  'rows_removed': 23,
+                  'rows_removed_pct': 0.03893685457931268}},
+     {'state': 'France',
+      'method': 'fixed_threshold',
+      'power_sources': {'total_power': {'min_threshold': 20000,
+                                        'max_threshold': 100000,
+                                        'total_points': 67831,
+                                        'removed': 83,
+                                        'removed_pct': 0.1223629314030458}},
+      'summary': {'rows_before': 67831,
+                  'rows_after': 67748,
+                  'rows_removed': 83,
+                  'rows_removed_pct': 0.1223629314030458}},
+     {'state': 'Germany',
+      'method': 'fixed_threshold',
+      'power_sources': {'total_power': {'min_threshold': 20000,
+                                        'max_threshold': 150000,
+                                        'total_points': 271324,
+                                        'removed': 32,
+                                        'removed_pct': 0.01179401748463092}},
+      'summary': {'rows_before': 271324,
+                  'rows_after': 271292,
+                  'rows_removed': 32,
+                  'rows_removed_pct': 0.01179401748463092}},
+     {'state': 'Spain',
+      'method': 'fixed_threshold',
+      'power_sources': {'total_power': {'min_threshold': 15000,
+                                        'max_threshold': 110000,
+                                        'total_points': 76969,
+                                        'removed': 69,
+                                        'removed_pct': 0.08964648105081266}},
+      'summary': {'rows_before': 76969,
+                  'rows_after': 76900,
+                  'rows_removed': 69,
+                  'rows_removed_pct': 0.08964648105081267}}]
+
 
 ### 2.1.5 Preprocessed vs original comparison (before/after visuals plus commentary on what changed and why) (10 points)
 
@@ -3151,7 +3199,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_1.png)
     
 
 
@@ -3163,7 +3211,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_3.png)
     
 
 
@@ -3175,7 +3223,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_5.png)
     
 
 
@@ -3187,7 +3235,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_7.png)
     
 
 
@@ -3199,7 +3247,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_9.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_9.png)
     
 
 
@@ -3211,7 +3259,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_11.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_11.png)
     
 
 
@@ -3223,7 +3271,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_13.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_13.png)
     
 
 
@@ -3235,7 +3283,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_15.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_15.png)
     
 
 
@@ -3247,7 +3295,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_17.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_17.png)
     
 
 
@@ -3259,7 +3307,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_19.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_19.png)
     
 
 
@@ -3271,7 +3319,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_21.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_21.png)
     
 
 
@@ -3283,7 +3331,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_33_23.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_23.png)
     
 
 
@@ -3333,7 +3381,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_36_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_0.png)
     
 
 
@@ -3342,7 +3390,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_36_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_2.png)
     
 
 
@@ -3351,7 +3399,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_36_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_4.png)
     
 
 
@@ -3360,7 +3408,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_36_6.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_6.png)
     
 
 
@@ -3433,43 +3481,43 @@ for country, df in dataframes_filtered:
 
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_1.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_3.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_5.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_7.png)
     
 
 
@@ -3545,25 +3593,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_3.png)
     
 
 
@@ -3632,25 +3680,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_3.png)
     
 
 
@@ -3719,25 +3767,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_3.png)
     
 
 
@@ -3826,7 +3874,7 @@ def plot_total_power_scatter(dataframes: list[tuple[str, pd.DataFrame]]):
 
 
 
-plot_total_power_scatter(dataframes)
+plot_total_power_scatter(dataframes_filtered)
 
     # for feature in Columns.Power.ALL:
     #     plt.figure(figsize=[len(dataframes_only), len(Columns.Power.ALL)])
@@ -3847,7 +3895,7 @@ plot_total_power_scatter(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_0.png)
     
 
 
@@ -3885,7 +3933,7 @@ def plot_yearly_profiles_seasonal(df, country_name):
 
 
 ```python
-for country, df in dataframes:
+for country, df in dataframes_filtered:
     if not ActvnMatrix.is_active(country, PlotOptions.YEARLY_SEASONAL_OVER_YEARS):
         continue
     plot_yearly_profiles_seasonal(df, country)
@@ -3894,25 +3942,25 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_3.png)
     
 
 
@@ -3962,7 +4010,7 @@ def plot_hourly_profile_by_season(df: pd.DataFrame, country: str):
 
 
 ```python
-for country, df in dataframes:
+for country, df in dataframes_filtered:
     if not ActvnMatrix.is_active(country, PlotOptions.HOURLY_PLOT_OVER_SEASONS):
         continue
     plot_hourly_profile_by_season(df, country)
@@ -4021,25 +4069,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_51_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_51_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_51_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_51_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_3.png)
     
 
 
@@ -4141,13 +4189,8 @@ for country, df in dataframes:
 
 ```python
 def plot_distribution_all_sources(dataframes_list):
-    """
-    Generates Distribution Analysis (KDE) for EVERY Power Source.
-    Layout: 5 plots per row.
-    Optimization: Zooms into the 1st-99th percentile range to cut off extreme outliers.
-    """
     print(f"\n{'='*80}")
-    print("B.2 DETAILED DISTRIBUTION ANALYSIS (ZOOMED - OUTLIERS CUT)")
+    print("2.2.2 Distribution analysis")
     print(f"{'='*80}")
 
     # identify collumms
@@ -4173,7 +4216,6 @@ def plot_distribution_all_sources(dataframes_list):
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(20, 3 * n_rows))
     axes = axes.flatten()
     
-    print(f"Generating {len(cols_to_plot)} distribution plots (zoomed)...")
 
     # loop through the colums and generate plots
     for i, col_name in enumerate(cols_to_plot):
@@ -4242,7 +4284,7 @@ def plot_distribution_all_sources(dataframes_list):
     plt.show()
 
 # execute
-plot_distribution_all_sources(dataframes)
+plot_distribution_all_sources(dataframes_filtered)
 ```
 
     
@@ -4254,7 +4296,7 @@ plot_distribution_all_sources(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_59_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_60_1.png)
     
 
 
@@ -4355,17 +4397,16 @@ def plot_power_comparison(
 def analyze_correlations_standard(dataframes_list):
 
     print(f"\n{'='*80}")
-    print("B.3 CORRELATION ANALYSIS (SHORT LABELS)")
+    print("2.2.3 CORRELATION ANALYSIS")
     print(f"{'='*80}")
 
     for country, df in dataframes_list:
-        print(f"\nAnalyzing {country}...")
         
         # select colums
         target_cols = Columns.Power.ALL + [Columns.CALC.TOTAL_POWER]
         available_cols = [c for c in target_cols if c in df.columns]
         
-        # 2. validate colums (take ony valid ones)
+        # validate colums (take ony valid ones)
         valid_cols = []
         for col in available_cols:
             if df[col].notna().sum() > 10 and df[col].std() > 0:
@@ -4376,47 +4417,65 @@ def analyze_correlations_standard(dataframes_list):
             print(f"Skipping {country}: Not enough valid columns.")
             continue
 
-        # 3. only validated collums
+        # only validated collums
         corr_data = df[valid_cols].copy()
         
-        # Logic: Split the string at " - " and keep only the first part.
-        # "Hydro Pumped Storage - Actual Aggregated [MW]" -> "Hydro Pumped Storage"
+        # split the string at " - " and keep only the first part.
+        #(because otherwise the plots would be to small)
         new_names = {}
         for col in valid_cols:
             if " - " in col:
                 clean_name = col.split(" - ")[0] 
             else:
-                clean_name = col # Keep original if no separator found
+                clean_name = col # keep original if no separator found
             new_names[col] = clean_name
             
         corr_data.rename(columns=new_names, inplace=True)
 
-        # 4. Calculate Matrices
+        # calculate Matrices
         pearson_corr = corr_data.corr(method='pearson')
         spearman_corr = corr_data.corr(method='spearman')
         
-        # 5. Plot
+        # plot conficturation
         fig, axes = plt.subplots(1, 2, figsize=(22, 9))
         
         # Left: Pearson
-        sns.heatmap(pearson_corr, annot=True, fmt=".2f", cmap='coolwarm', 
-                    vmin=-1, vmax=1, center=0, square=True, linewidths=0.5, 
-                    ax=axes[0], annot_kws={"size": 10})
+        sns.heatmap(
+            pearson_corr, 
+            annot=True, 
+            fmt=".2f", 
+            cmap='coolwarm', 
+            vmin=-1, 
+            vmax=1, 
+            center=0, 
+            square=True, 
+            linewidths=0.5, 
+            ax=axes[0],
+            annot_kws={"size": 10})
         axes[0].set_title(f"{country} - Pearson (Linear)", fontsize=16, fontweight='bold', pad=15)
         axes[0].tick_params(axis='both', which='major', labelsize=11)
         
         # Right: Spearman
-        sns.heatmap(spearman_corr, annot=True, fmt=".2f", cmap='coolwarm', 
-                    vmin=-1, vmax=1, center=0, square=True, linewidths=0.5, 
-                    ax=axes[1], annot_kws={"size": 10})
+        sns.heatmap(
+            spearman_corr, 
+            annot=True, 
+            fmt=".2f", 
+            cmap='coolwarm', 
+            vmin=-1,
+            vmax=1,
+            center=0,
+            square=True,
+            linewidths=0.5, 
+            ax=axes[1],
+            annot_kws={"size": 10})
         axes[1].set_title(f"{country} - Spearman (Rank Order)", fontsize=16, fontweight='bold', pad=15)
         axes[1].tick_params(axis='both', which='major', labelsize=11)
         
         plt.tight_layout()
         plt.show()
 
-# --- EXECUTION ---
-analyze_correlations_standard(dataframes)
+# execute
+analyze_correlations_standard(dataframes_filtered)
 ```
 
     
@@ -4429,7 +4488,7 @@ analyze_correlations_standard(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_62_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_1.png)
     
 
 
@@ -4439,7 +4498,7 @@ analyze_correlations_standard(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_62_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_3.png)
     
 
 
@@ -4449,7 +4508,7 @@ analyze_correlations_standard(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_62_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_5.png)
     
 
 
@@ -4459,7 +4518,7 @@ analyze_correlations_standard(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_62_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_7.png)
     
 
 
@@ -4493,8 +4552,7 @@ def analyze_periodic_patterns(dataframes_list):
         # layout for the plots
         fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 4.5))
         
-        # 1 daily profile (mean line and shading for all the other data)
-        #------------------
+        # DAILY profile
         day_stats = pdf.groupby(Columns.AXIS.HOURS_OF_DAY)[TARGET].agg(['mean', 'std'])
         # averaging line
         ax1.plot(day_stats.index, 
@@ -4517,8 +4575,7 @@ def analyze_periodic_patterns(dataframes_list):
                  ls='--', 
                  alpha=0.5)
 
-        # 2 weekly profile (mean line and shading for all the other data)
-        #------------------
+        # WEEKLY profile 
         week_stats = pdf.groupby(Columns.AXIS.DAY_OF_WEEK_STR)[TARGET].agg(['mean', 'std']).reindex(WEEK_ORDER)
         # averaging line
         ax2.plot(week_stats.index, 
@@ -4538,17 +4595,15 @@ def analyze_periodic_patterns(dataframes_list):
         ax2.tick_params(axis='x', rotation=45)
         ax2.grid(True, ls='--', alpha=0.5)
 
-        # 3 seasonal tred with bar charts
-        #   + marking the maximum in red
-        #------------------
+        # SEASONAL tred with bar charts
         season_stats = pdf.groupby(Columns.AXIS.MONTH_STR)[TARGET].mean().reindex(MONTH_ORDER)
         bars = ax3.bar(season_stats.index, 
                        season_stats.values, 
                        color=colors[country], 
                        alpha=0.7, 
                        edgecolor='k')
-        # finding the month with the maximum production
-        # marking it dark red
+        
+        # mark the month with the maximum production in darkred
         if not season_stats.empty:
             peak_idx = MONTH_ORDER.index(season_stats.idxmax())
             bars[peak_idx].set(color='darkred', alpha=1.0)
@@ -4562,7 +4617,7 @@ def analyze_periodic_patterns(dataframes_list):
         plt.show()
 
 # execute
-analyze_periodic_patterns(dataframes)
+analyze_periodic_patterns(dataframes_filtered)
 ```
 
     
@@ -4572,52 +4627,36 @@ analyze_periodic_patterns(dataframes)
     Italy:
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3168583709.py:87: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
-      plt.tight_layout()
-
-
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_64_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_1.png)
     
 
 
     France:
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3168583709.py:87: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
-      plt.tight_layout()
-
-
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_64_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_3.png)
     
 
 
     Germany:
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3168583709.py:87: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
-      plt.tight_layout()
-
-
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_64_8.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_5.png)
     
 
 
     Spain:
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_19752\3168583709.py:87: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
-      plt.tight_layout()
-
-
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_64_11.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_7.png)
     
 
 
@@ -4708,6 +4747,34 @@ One central message of renewable energy is that windy energy is available in the
 
 ```python
 # -----------------------------
+# 2. Cross-tabulation analysis
+# -----------------------------
+def cross_tab_analysis(df, col1, col2, bins1=None, bins2=None, normalize=True):
+    """
+    Cross-tabulation between two variables (can discretize with bins).
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+    col1, col2 : str
+        Columns to cross-tabulate
+    bins1, bins2 : list or None
+        Optional bin edges to discretize continuous variables
+    normalize : bool
+        Return percentages if True
+    
+    Returns
+    -------
+    ctab : pd.DataFrame
+    """
+    data1 = pd.cut(df[col1], bins=bins1) if bins1 else df[col1]
+    data2 = pd.cut(df[col2], bins=bins2) if bins2 else df[col2]
+    
+    ctab = pd.crosstab(data1, data2, normalize="all" if normalize else False)
+    return ctab
+
+
+# -----------------------------
 # 2x2 Cross-tab Heatmap Plot
 # -----------------------------
 def plot_cross_tab_heatmaps_2x2(dataframes, solar_col, wind_col, bins=5, cmap="viridis", show_percent=True):
@@ -4780,25 +4847,20 @@ plot_cross_tab_heatmaps_2x2(
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_68_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_69_0.png)
     
 
 
 
 ```python
 def demonstrate_lln(dataframes_list):
-    """
-    Demonstrates the Law of Large Numbers (LLN).
-    Visualizes how the sample mean converges to the true population mean
-    as the sample size (n) increases.
-    """
     print(f"\n{'='*80}")
-    print("D.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS (LLN)")
+    print("2.4.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS ")
     print(f"{'='*80}")
     
     TARGET = Columns.CALC.TOTAL_POWER
 
-    # Setup Grid: 2 columns wide
+    # grid setup
     n_cols = 2
     n_rows = (len(dataframes_list) + n_cols - 1) // n_cols
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(20, 6 * n_rows))
@@ -4811,22 +4873,19 @@ def demonstrate_lln(dataframes_list):
             ax.text(0.5, 0.5, "Data Missing", ha='center')
             continue
 
-        print(f"Processing LLN for {country}...")
-
-        # 1. Population Parameters
-        #   calculate the mean of the dataset
-        #   (to this line the shuffled data should converge)
+        # calculate mean
+        # (line to converge to)
         population_data = df[TARGET].dropna()
         true_mean = population_data.mean()
         
-        # 2. simulate the random sampling
+        # simulate the random sampling
         #   the data neets to be shuffeled!
         #   if it starts in the morning the first values are to low and then the data isnt convergeing right.
         shuffled_samples = population_data.sample(frac=1, random_state=42).values
         
         # 3. calculating the cumulative mean
         #    mean of the first value, the first two, three and so on
-        #   1/1 (1+2)/2 (1+2+3)/3 (1+2+3+4)/4
+        #    1/1 (1+2)/2 (1+2+3)/3 (1+2+3+4)/4
         cumulative_sum = np.cumsum(shuffled_samples)
         #    divide by 1,2,3,4,5.....
         sample_sizes = np.arange(1, len(shuffled_samples) + 1)
@@ -4837,8 +4896,8 @@ def demonstrate_lln(dataframes_list):
         limit_n = 5000 
         
         # plot the calculated mean ( 1/1 (1+2)/2 (1+2+3)/3 ....)
-        ax.plot(sample_sizes[:limit_n], 
-                running_means[:limit_n], 
+        ax.plot(sample_sizes[:limit_n],     # added limit
+                running_means[:limit_n],    # added limit
                 color=colors[country], 
                 linewidth=1.5, 
                 alpha=0.8, 
@@ -4859,7 +4918,7 @@ def demonstrate_lln(dataframes_list):
         ax.grid(True, linestyle=':', alpha=0.6)
         
         # Add text verification
-        # Compare Mean at n=10 vs n=5000
+        # compare mean at n=10 vs n=5000
         mean_10 = running_means[9]
         mean_5000 = running_means[limit_n-1]
 
@@ -4881,11 +4940,11 @@ def demonstrate_lln(dataframes_list):
 
     print("\n INTERPRETATION:")
     print(" - The jagged line starts wildly volatile because 'n' is small (small sample size).")
-    print(" - As 'n' increases (moving right), the jagged line flattens and hugs the True Mean.")
-    print(" - This proves that larger datasets yield more reliable statistics.")
+    print(" - As 'n' increases (moving right), the colored line flattens and is getting closer to the true mean.")
+    print(" - This proves larger datasets yield more reliable statistics.")
 
 # execute
-demonstrate_lln(dataframes)
+demonstrate_lln(dataframes_filtered)
 ```
 
     
@@ -4900,7 +4959,7 @@ demonstrate_lln(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_69_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_1.png)
     
 
 
@@ -4914,19 +4973,15 @@ demonstrate_lln(dataframes)
 
 ```python
 def demonstrate_clt(dataframes_list):
-    """
-    Demonstrates the Central Limit Theorem (CLT).
-    ADJUSTABLE: Change simulation parameters at the top to see different effects.
-    """
     print(f"\n{'='*80}")
-    print("D.2 STATISTICAL THEORY: CENTRAL LIMIT THEOREM (CLT)")
+    print("2.4.2  CENTRAL LIMIT THEOREM (CLT)")
     print(f"{'='*80}")
 
     TARGET_COL = Columns.CALC.TOTAL_POWER  # Column to analyze
     NUM_TRIALS = 2000       # repetition times
-    SMALL_N    = 5          # small sample size for comparison
+    SMALL_N    = 1          # small sample size for comparison(must be smaller than 5)
     LARGE_N    = 2000       # lagre sample size (smooth)
-    BINS       = 100        # histogramm resolution (Bars)
+    BINS       = 100        # histogramm resolution (bars)
     # ==========================================
 
     for country, df in dataframes_list:
@@ -4936,16 +4991,15 @@ def demonstrate_clt(dataframes_list):
         population = df[TARGET_COL].dropna().values
         true_mean = np.mean(population)
         
-        
         # SMALL sample size
         samples_small = np.random.choice(population, size=(NUM_TRIALS, SMALL_N))
         means_small = np.mean(samples_small, axis=1)
         
-        # small sample size
+        # LARGE sample size
         samples_large = np.random.choice(population, size=(NUM_TRIALS, LARGE_N))
         means_large = np.mean(samples_large, axis=1)
 
-        # plot
+        # plot presettings
         fig, axes = plt.subplots(1, 3, figsize=(20, 5))
         
         # LEFT plot the original 
@@ -4956,6 +5010,7 @@ def demonstrate_clt(dataframes_list):
             color='gray', 
             stat='density', 
             bins=BINS)
+        
         # settings
         axes[0].set_title(f"{country}: Original Population", fontweight='bold')
         axes[0].set_xlabel("Power [MW]")
@@ -4971,6 +5026,7 @@ def demonstrate_clt(dataframes_list):
             stat='density',         # normlaizes height 
             bins=BINS)
         # settings
+      
         axes[1].set_title(f"Sampling Dist. (N={SMALL_N})", fontweight='bold')
         axes[1].set_xlabel("Mean Power [MW]")
         axes[1].axvline(true_mean, color='black', linestyle='--', label='True Mean')
@@ -4984,33 +5040,12 @@ def demonstrate_clt(dataframes_list):
             color=colors[country], 
             stat='density',         # normlaizes height  
             bins=BINS)
-        
-        # overlay for the RIGHT graph
-        # Mean = True Mean, 
-        # Std = PopStd / sqrt(N)
-        std_error = np.std(population) / np.sqrt(LARGE_N)
-        x_axis = np.linspace(min(means_large), max(means_large), 100)
-        # normal distribution formular
-        pdf = (1 / (std_error * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x_axis - true_mean) / std_error) ** 2)
-        
-        # black overlay line
-        axes[2].plot(
-            x_axis, 
-            pdf, 
-            'k', 
-            linewidth=2, 
-            label='Theoretical Normal')
-        # settings
-        axes[2].set_title(f"Sampling Dist. (N={LARGE_N}) -> Bell Curve!", fontweight='bold')
-        axes[2].set_xlabel("Mean Power [MW]")
-        axes[2].axvline(true_mean, color='black', linestyle='--', label='True Mean')
-        axes[2].legend()
 
         plt.tight_layout()
         plt.show()
 
 # execute
-demonstrate_clt(dataframes)
+demonstrate_clt(dataframes_filtered)
 ```
 
     
@@ -5021,25 +5056,25 @@ demonstrate_clt(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_3.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_4.png)
     
 
 
@@ -5222,32 +5257,7 @@ def compute_event_probabilities(df, thresholds: dict[str, tuple[float | str]], v
 
 
 
-# -----------------------------
-# 2. Cross-tabulation analysis
-# -----------------------------
-def cross_tab_analysis(df, col1, col2, bins1=None, bins2=None, normalize=True):
-    """
-    Cross-tabulation between two variables (can discretize with bins).
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-    col1, col2 : str
-        Columns to cross-tabulate
-    bins1, bins2 : list or None
-        Optional bin edges to discretize continuous variables
-    normalize : bool
-        Return percentages if True
-    
-    Returns
-    -------
-    ctab : pd.DataFrame
-    """
-    data1 = pd.cut(df[col1], bins=bins1) if bins1 else df[col1]
-    data2 = pd.cut(df[col2], bins=bins2) if bins2 else df[col2]
-    
-    ctab = pd.crosstab(data1, data2, normalize="all" if normalize else False)
-    return ctab
 
 # -----------------------------
 # 3. Conditional probability
@@ -5538,7 +5548,7 @@ def plot_yearly_total_power_trend(
 
 
 ```python
-for country, df in dataframes:
+for country, df in dataframes_filtered:
     if not ActvnMatrix.is_active(country, PlotOptions.TREND_TOTAL_POWER_OVER_YEARS):
         continue
     plot_yearly_total_power_trend(df, country)
@@ -5546,25 +5556,25 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_78_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_78_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_78_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_78_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_3.png)
     
 
 
@@ -5681,7 +5691,7 @@ def plot_hourly_total_power_regression(df: pd.DataFrame, country: str, degree: i
 
 
 ```python
-for country, df in dataframes:
+for country, df in dataframes_filtered:
     if not ActvnMatrix.is_active(country, PlotOptions.HOURLY_TOTAL_POWER_REGRESSION):
         continue
     plot_hourly_total_power_regression(df, country)
@@ -5690,17 +5700,17 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_0.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_2704\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_2.png)
     
 
 
@@ -5726,17 +5736,17 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_4.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_2704\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_6.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_6.png)
     
 
 
@@ -5762,17 +5772,17 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_8.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_8.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_2704\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_10.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_10.png)
     
 
 
@@ -5798,17 +5808,17 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_12.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_12.png)
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_2704\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_80_14.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_14.png)
     
 
 
@@ -5883,7 +5893,7 @@ def plot_monthly_trend_regression(
 
 
 ```python
-for country, df in dataframes:
+for country, df in dataframes_filtered:
     if not ActvnMatrix.is_active(country, PlotOptions.TREND_TOTAL_POWER_OVER_MONTHS):
         continue
     plot_monthly_trend_regression(df, country)
@@ -5891,24 +5901,28 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_1.png)
+    
+
+
+    C:\ProgramData\anaconda3\Lib\site-packages\IPython\core\pylabtools.py:170: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
+      fig.canvas.print_figure(bytes_io, **kw)
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_3.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_2.png)
-    
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_4.png)
     
 
