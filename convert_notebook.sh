@@ -31,3 +31,6 @@ nbstripout "$NOTEBOOK"
 
 echo "LaTeX without Python code written to:"
 echo "  $LATEX_NOPYP_FILE"
+
+echo "Actual tree:"
+tree -h .

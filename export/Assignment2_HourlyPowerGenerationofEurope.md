@@ -462,6 +462,8 @@ Print information of data
 ```python
 base_path = Path.cwd()
 subfolder = Path(r"OneDrive - FH JOANNEUM\Courses\STM_WS2025_DA_Data Analysis\Assignment_2")
+#subfolder = Path(r"C:\Users\chris\FH JOANNEUM\Lackner Oswald - Assignment_2")
+#subfolder = Path(r"data")  # <-- For venv testing in github repository
 
 COUNTRIES = ["Italy", "France", "Germany", "Spain"]
 
@@ -519,137 +521,15 @@ for country in COUNTRIES:
       Columns: 35
     
     Data Overview:
-                   YEAR  Biomass - Actual Aggregated [MW]  \
-    count  59070.000000                      59047.000000   
-    mean    2018.882123                        503.847901   
-    std        1.947274                        161.482369   
-    min     2016.000000                        167.000000   
-    25%     2017.000000                        354.000000   
-    50%     2019.000000                        534.000000   
-    75%     2021.000000                        651.000000   
-    max     2022.000000                        845.000000   
-    
-           Fossil Brown coal/Lignite - Actual Aggregated [MW]  \
-    count                                                0.0    
-    mean                                                 NaN    
-    std                                                  NaN    
-    min                                                  NaN    
-    25%                                                  NaN    
-    50%                                                  NaN    
-    75%                                                  NaN    
-    max                                                  NaN    
-    
-           Fossil Coal-derived gas - Actual Aggregated [MW]  \
-    count                                      58495.000000   
-    mean                                         439.063971   
-    std                                          246.285346   
-    min                                            0.000000   
-    25%                                          235.000000   
-    50%                                          396.000000   
-    75%                                          620.000000   
-    max                                         1135.000000   
-    
-           Fossil Gas - Actual Aggregated [MW]  \
-    count                         59047.000000   
-    mean                          10759.009670   
-    std                            4876.335472   
-    min                            1590.000000   
-    25%                            6872.000000   
-    50%                           10022.000000   
-    75%                           13964.500000   
-    max                           28140.000000   
-    
-           Fossil Hard coal - Actual Aggregated [MW]  \
-    count                               58951.000000   
-    mean                                 1926.035725   
-    std                                   948.998914   
-    min                                   204.000000   
-    25%                                  1206.000000   
-    50%                                  1655.000000   
-    75%                                  2554.000000   
-    max                                  6198.000000   
-    
-           Fossil Oil - Actual Aggregated [MW]  \
-    count                         59047.000000   
-    mean                            144.205717   
-    std                             126.988867   
-    min                               0.000000   
-    25%                              37.000000   
-    50%                              97.000000   
-    75%                             217.000000   
-    max                             868.000000   
-    
-           Fossil Oil shale - Actual Aggregated [MW]  \
-    count                                        0.0   
-    mean                                         NaN   
-    std                                          NaN   
-    min                                          NaN   
-    25%                                          NaN   
-    50%                                          NaN   
-    75%                                          NaN   
-    max                                          NaN   
-    
-           Fossil Peat - Actual Aggregated [MW]  \
-    count                                   0.0   
-    mean                                    NaN   
-    std                                     NaN   
-    min                                     NaN   
-    25%                                     NaN   
-    50%                                     NaN   
-    75%                                     NaN   
-    max                                     NaN   
-    
-           Geothermal - Actual Aggregated [MW]  ...  \
-    count                         59047.000000  ...   
-    mean                            647.465612  ...   
-    std                              23.957432  ...   
-    min                             485.000000  ...   
-    25%                             633.000000  ...   
-    50%                             650.000000  ...   
-    75%                             665.000000  ...   
-    max                             707.000000  ...   
-    
-           Wind Offshore - Actual Aggregated [MW]  \
-    count                             2945.000000   
-    mean                                 3.131749   
-    std                                  5.566327   
-    min                                  0.000000   
-    25%                                  0.000000   
-    50%                                  1.000000   
-    75%                                  3.000000   
-    max                                 30.000000   
-    
-           Wind Onshore - Actual Aggregated [MW]   total_power  \
-    count                           59047.000000  59070.000000   
-    mean                             2137.368876  29103.500288   
-    std                              1546.521569   6956.705377   
-    min                                20.000000      0.000000   
-    25%                               873.000000  23331.000000   
-    50%                              1764.000000  28424.500000   
-    75%                              3105.000000  34754.750000   
-    max                              7692.000000  49695.000000   
-    
-           total_fossil_power  total_renewable_power          year         month  \
-    count        59070.000000           59070.000000  59070.000000  59070.000000   
-    mean         13255.915659           10634.702641   2018.882123      6.834354   
-    std           5300.486392            4009.550939      1.947274      3.409561   
-    min              0.000000               0.000000   2016.000000      1.000000   
-    25%           9148.000000            7454.250000   2017.000000      3.903226   
-    50%          12591.000000           10183.000000   2019.000000      6.800000   
-    75%          16828.000000           13446.000000   2021.000000      9.666667   
-    max          31842.000000           23314.000000   2022.000000     12.967742   
-    
-            day_in_year   day_of_week   hours_a_day  
-    count  59070.000000  59070.000000  59070.000000  
-    mean     178.393770      3.480650     11.499035  
-    std      103.886302      2.021478      6.922556  
-    min        1.000000      0.000000      0.000000  
-    25%       88.875000      1.750000      5.000000  
-    50%      176.791667      3.500000     11.000000  
-    75%      264.666667      5.250000     17.000000  
-    max      366.958333      6.958333     23.000000  
-    
-    [8 rows x 30 columns]
+                   YEAR  Biomass - Actual Aggregated [MW]  Fossil Brown coal/Lignite - Actual Aggregated [MW]  Fossil Coal-derived gas - Actual Aggregated [MW]  Fossil Gas - Actual Aggregated [MW]  Fossil Hard coal - Actual Aggregated [MW]  Fossil Oil - Actual Aggregated [MW]  Fossil Oil shale - Actual Aggregated [MW]  Fossil Peat - Actual Aggregated [MW]  Geothermal - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Consumption [MW]  Hydro Run-of-river and poundage - Actual Aggregated [MW]  Hydro Water Reservoir - Actual Aggregated [MW]  Marine - Actual Aggregated [MW]  Nuclear - Actual Aggregated [MW]  Other - Actual Aggregated [MW]  Other renewable - Actual Aggregated [MW]  Solar - Actual Aggregated [MW]  Waste - Actual Aggregated [MW]  Wind Offshore - Actual Aggregated [MW]  Wind Onshore - Actual Aggregated [MW]   total_power  total_fossil_power  total_renewable_power          year         month   day_in_year   day_of_week   hours_a_day
+    count  59070.000000                      59047.000000                                                0.0                                       58495.000000                         59047.000000                               58951.000000                         59047.000000                                        0.0                                   0.0                         59047.000000                                   57563.000000                                    41756.000000                                       59047.000000                                           59023.000000                              0.0                               0.0                    58759.000000                                       0.0                    59047.000000                    59047.000000                             2945.000000                           59047.000000  59070.000000        59070.000000           59070.000000  59070.000000  59070.000000  59070.000000  59070.000000  59070.000000
+    mean    2018.882123                        503.847901                                                NaN                                         439.063971                         10759.009670                                1926.035725                           144.205717                                        NaN                                   NaN                           647.465612                                     387.120425                                      363.123838                                        3699.176995                                             746.988056                              NaN                               NaN                     5202.974795                                       NaN                     2270.121496                       37.158873                                3.131749                            2137.368876  29103.500288        13255.915659           10634.702641   2018.882123      6.834354    178.393770      3.480650     11.499035
+    std        1.947274                        161.482369                                                NaN                                         246.285346                          4876.335472                                 948.998914                           126.988867                                        NaN                                   NaN                            23.957432                                     528.681021                                      484.751554                                        1581.773082                                             488.467826                              NaN                               NaN                     3814.591969                                       NaN                     3139.213214                        8.672031                                5.566327                            1546.521569   6956.705377         5300.486392            4009.550939      1.947274      3.409561    103.886302      2.021478      6.922556
+    min     2016.000000                        167.000000                                                NaN                                           0.000000                          1590.000000                                 204.000000                             0.000000                                        NaN                                   NaN                           485.000000                                       0.000000                                        1.000000                                         774.000000                                               4.000000                              NaN                               NaN                      623.000000                                       NaN                        0.000000                        5.000000                                0.000000                              20.000000      0.000000            0.000000               0.000000   2016.000000      1.000000      1.000000      0.000000      0.000000
+    25%     2017.000000                        354.000000                                                NaN                                         235.000000                          6872.000000                                1206.000000                            37.000000                                        NaN                                   NaN                           633.000000                                       4.000000                                       24.000000                                        2413.000000                                             356.000000                              NaN                               NaN                     2077.000000                                       NaN                        0.000000                       32.000000                                0.000000                             873.000000  23331.000000         9148.000000            7454.250000   2017.000000      3.903226     88.875000      1.750000      5.000000
+    50%     2019.000000                        534.000000                                                NaN                                         396.000000                         10022.000000                                1655.000000                            97.000000                                        NaN                                   NaN                           650.000000                                     171.000000                                      156.000000                                        3545.000000                                             660.000000                              NaN                               NaN                     3199.000000                                       NaN                       69.000000                       38.000000                                1.000000                            1764.000000  28424.500000        12591.000000           10183.000000   2019.000000      6.800000    176.791667      3.500000     11.000000
+    75%     2021.000000                        651.000000                                                NaN                                         620.000000                         13964.500000                                2554.000000                           217.000000                                        NaN                                   NaN                           665.000000                                     553.000000                                      510.000000                                        4842.500000                                            1068.000000                              NaN                               NaN                     8061.000000                                       NaN                     4356.000000                       43.000000                                3.000000                            3105.000000  34754.750000        16828.000000           13446.000000   2021.000000      9.666667    264.666667      5.250000     17.000000
+    max     2022.000000                        845.000000                                                NaN                                        1135.000000                         28140.000000                                6198.000000                           868.000000                                        NaN                                   NaN                           707.000000                                    4786.000000                                     3974.000000                                        8534.000000                                            2872.000000                              NaN                               NaN                    19489.000000                                       NaN                    13155.000000                       62.000000                               30.000000                            7692.000000  49695.000000        31842.000000           23314.000000   2022.000000     12.967742    366.958333      6.958333     23.000000
     
     
     ====================================================================================================
@@ -692,137 +572,15 @@ for country in COUNTRIES:
       Columns: 35
     
     Data Overview:
-                   YEAR  Biomass - Actual Aggregated [MW]  \
-    count  67831.000000                      67751.000000   
-    mean    2018.380711                        335.920311   
-    std        2.235456                         93.658593   
-    min     2015.000000                        104.000000   
-    25%     2016.000000                        286.000000   
-    50%     2018.000000                        322.000000   
-    75%     2020.000000                        353.000000   
-    max     2022.000000                       1149.000000   
-    
-           Fossil Brown coal/Lignite - Actual Aggregated [MW]  \
-    count                                                0.0    
-    mean                                                 NaN    
-    std                                                  NaN    
-    min                                                  NaN    
-    25%                                                  NaN    
-    50%                                                  NaN    
-    75%                                                  NaN    
-    max                                                  NaN    
-    
-           Fossil Coal-derived gas - Actual Aggregated [MW]  \
-    count                                               0.0   
-    mean                                                NaN   
-    std                                                 NaN   
-    min                                                 NaN   
-    25%                                                 NaN   
-    50%                                                 NaN   
-    75%                                                 NaN   
-    max                                                 NaN   
-    
-           Fossil Gas - Actual Aggregated [MW]  \
-    count                         67750.000000   
-    mean                           3895.820738   
-    std                            2431.711101   
-    min                             300.000000   
-    25%                            1889.000000   
-    50%                            3570.000000   
-    75%                            5699.000000   
-    max                           25289.000000   
-    
-           Fossil Hard coal - Actual Aggregated [MW]  \
-    count                               63836.000000   
-    mean                                  630.728131   
-    std                                   739.395393   
-    min                                     0.000000   
-    25%                                    18.000000   
-    50%                                   373.000000   
-    75%                                  1064.000000   
-    max                                  4472.000000   
-    
-           Fossil Oil - Actual Aggregated [MW]  \
-    count                         67749.000000   
-    mean                            224.243915   
-    std                             206.261629   
-    min                              42.000000   
-    25%                             139.000000   
-    50%                             174.000000   
-    75%                             234.000000   
-    max                            4278.000000   
-    
-           Fossil Oil shale - Actual Aggregated [MW]  \
-    count                                        0.0   
-    mean                                         NaN   
-    std                                          NaN   
-    min                                          NaN   
-    25%                                          NaN   
-    50%                                          NaN   
-    75%                                          NaN   
-    max                                          NaN   
-    
-           Fossil Peat - Actual Aggregated [MW]  \
-    count                                   0.0   
-    mean                                    NaN   
-    std                                     NaN   
-    min                                     NaN   
-    25%                                     NaN   
-    50%                                     NaN   
-    75%                                     NaN   
-    max                                     NaN   
-    
-           Geothermal - Actual Aggregated [MW]  ...  \
-    count                                  0.0  ...   
-    mean                                   NaN  ...   
-    std                                    NaN  ...   
-    min                                    NaN  ...   
-    25%                                    NaN  ...   
-    50%                                    NaN  ...   
-    75%                                    NaN  ...   
-    max                                    NaN  ...   
-    
-           Wind Offshore - Actual Aggregated [MW]  \
-    count                                     0.0   
-    mean                                      NaN   
-    std                                       NaN   
-    min                                       NaN   
-    25%                                       NaN   
-    50%                                       NaN   
-    75%                                       NaN   
-    max                                       NaN   
-    
-           Wind Onshore - Actual Aggregated [MW]    total_power  \
-    count                           67749.000000   67831.000000   
-    mean                             3229.824883   59069.338370   
-    std                              2493.167190   10803.993206   
-    min                               262.000000       0.000000   
-    25%                              1423.000000   51527.500000   
-    50%                              2413.000000   57776.000000   
-    75%                              4286.000000   66918.500000   
-    max                             21538.000000  222585.000000   
-    
-           total_fossil_power  total_renewable_power          year         month  \
-    count        67831.000000           67831.000000  67831.000000  67831.000000   
-    mean          4708.721927           12243.862747   2018.380711      6.857043   
-    std           2961.845409            3838.617030      2.235456      3.416634   
-    min              0.000000               0.000000   2015.000000      1.000000   
-    25%           2407.000000            9385.000000   2016.000000      3.935484   
-    50%           4171.000000           11867.000000   2018.000000      6.833333   
-    75%           6925.000000           14637.000000   2020.000000      9.700000   
-    max          30447.000000           41356.000000   2022.000000     12.967742   
-    
-            day_in_year   day_of_week   hours_a_day  
-    count  67831.000000  67831.000000  67831.000000  
-    mean     179.052286      3.480497     11.499020  
-    std      104.092849      2.021036      6.922553  
-    min        1.000000      0.000000      0.000000  
-    25%       89.291667      1.750000      5.000000  
-    50%      177.625000      3.500000     11.000000  
-    75%      265.958333      5.250000     17.000000  
-    max      366.958333      6.958333     23.000000  
-    
-    [8 rows x 30 columns]
+                   YEAR  Biomass - Actual Aggregated [MW]  Fossil Brown coal/Lignite - Actual Aggregated [MW]  Fossil Coal-derived gas - Actual Aggregated [MW]  Fossil Gas - Actual Aggregated [MW]  Fossil Hard coal - Actual Aggregated [MW]  Fossil Oil - Actual Aggregated [MW]  Fossil Oil shale - Actual Aggregated [MW]  Fossil Peat - Actual Aggregated [MW]  Geothermal - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Consumption [MW]  Hydro Run-of-river and poundage - Actual Aggregated [MW]  Hydro Water Reservoir - Actual Aggregated [MW]  Marine - Actual Aggregated [MW]  Nuclear - Actual Aggregated [MW]  Other - Actual Aggregated [MW]  Other renewable - Actual Aggregated [MW]  Solar - Actual Aggregated [MW]  Waste - Actual Aggregated [MW]  Wind Offshore - Actual Aggregated [MW]  Wind Onshore - Actual Aggregated [MW]    total_power  total_fossil_power  total_renewable_power          year         month   day_in_year   day_of_week   hours_a_day
+    count  67831.000000                      67751.000000                                                0.0                                                0.0                         67750.000000                               63836.000000                         67749.000000                                        0.0                                   0.0                                  0.0                                   37874.000000                                    29871.000000                                       67748.000000                                           67614.000000                              0.0                      67750.000000                             0.0                                       0.0                    67763.000000                    67752.000000                                     0.0                           67749.000000   67831.000000        67831.000000           67831.000000  67831.000000  67831.000000  67831.000000  67831.000000  67831.000000
+    mean    2018.380711                        335.920311                                                NaN                                                NaN                          3895.820738                                 630.728131                           224.243915                                        NaN                                   NaN                                  NaN                                    1005.951867                                     1453.772354                                        4515.060002                                            1704.756973                              NaN                      41962.107941                             NaN                                       NaN                     1272.970987                      204.993314                                     NaN                            3229.824883   59069.338370         4708.721927           12243.862747   2018.380711      6.857043    179.052286      3.480497     11.499020
+    std        2.235456                         93.658593                                                NaN                                                NaN                          2431.711101                                 739.395393                           206.261629                                        NaN                                   NaN                                  NaN                                     699.611502                                      916.538610                                        1500.630454                                            1109.958128                              NaN                       7738.209410                             NaN                                       NaN                     1864.246193                       52.092954                                     NaN                            2493.167190   10803.993206         2961.845409            3838.617030      2.235456      3.416634    104.092849      2.021036      6.922553
+    min     2015.000000                        104.000000                                                NaN                                                NaN                           300.000000                                   0.000000                            42.000000                                        NaN                                   NaN                                  NaN                                       0.000000                                        1.000000                                         745.000000                                               0.000000                              NaN                      19179.000000                             NaN                                       NaN                        0.000000                       27.000000                                     NaN                             262.000000       0.000000            0.000000               0.000000   2015.000000      1.000000      1.000000      0.000000      0.000000
+    25%     2016.000000                        286.000000                                                NaN                                                NaN                          1889.000000                                  18.000000                           139.000000                                        NaN                                   NaN                                  NaN                                     469.000000                                      648.000000                                        3250.000000                                             875.000000                              NaN                      37663.000000                             NaN                                       NaN                        0.000000                      175.000000                                     NaN                            1423.000000   51527.500000         2407.000000            9385.000000   2016.000000      3.935484     89.291667      1.750000      5.000000
+    50%     2018.000000                        322.000000                                                NaN                                                NaN                          3570.000000                                 373.000000                           174.000000                                        NaN                                   NaN                                  NaN                                     886.000000                                     1436.000000                                        4525.000000                                            1482.000000                              NaN                      41764.500000                             NaN                                       NaN                      178.000000                      212.000000                                     NaN                            2413.000000   57776.000000         4171.000000           11867.000000   2018.000000      6.833333    177.625000      3.500000     11.000000
+    75%     2020.000000                        353.000000                                                NaN                                                NaN                          5699.000000                                1064.000000                           234.000000                                        NaN                                   NaN                                  NaN                                    1400.000000                                     2169.500000                                        5759.000000                                            2285.000000                              NaN                      46973.750000                             NaN                                       NaN                     2165.000000                      243.000000                                     NaN                            4286.000000   66918.500000         6925.000000           14637.000000   2020.000000      9.700000    265.958333      5.250000     17.000000
+    max     2022.000000                       1149.000000                                                NaN                                                NaN                         25289.000000                                4472.000000                          4278.000000                                        NaN                                   NaN                                  NaN                                    4368.000000                                     7663.000000                                       18293.000000                                            8406.000000                              NaN                     152050.000000                             NaN                                       NaN                    10701.000000                      754.000000                                     NaN                           21538.000000  222585.000000        30447.000000           41356.000000   2022.000000     12.967742    366.958333      6.958333     23.000000
     
     
     ====================================================================================================
@@ -871,137 +629,15 @@ for country in COUNTRIES:
       Columns: 35
     
     Data Overview:
-                    YEAR  Biomass - Actual Aggregated [MW]  \
-    count  271324.000000                     271292.000000   
-    mean     2018.380711                       4424.540702   
-    std         2.235444                        355.105745   
-    min      2015.000000                       3294.000000   
-    25%      2016.000000                       4154.000000   
-    50%      2018.000000                       4485.000000   
-    75%      2020.000000                       4713.000000   
-    max      2022.000000                       5137.000000   
-    
-           Fossil Brown coal/Lignite - Actual Aggregated [MW]  \
-    count                                      271292.000000    
-    mean                                        12998.443419    
-    std                                          3493.252888    
-    min                                          2851.000000    
-    25%                                         11200.000000    
-    50%                                         13751.000000    
-    75%                                         15589.000000    
-    max                                         19827.000000    
-    
-           Fossil Coal-derived gas - Actual Aggregated [MW]  \
-    count                                     161180.000000   
-    mean                                         354.316181   
-    std                                          172.325799   
-    min                                            0.000000   
-    25%                                          294.000000   
-    50%                                          392.000000   
-    75%                                          480.000000   
-    max                                          758.000000   
-    
-           Fossil Gas - Actual Aggregated [MW]  \
-    count                        271292.000000   
-    mean                           4570.626373   
-    std                            2850.303636   
-    min                             399.000000   
-    25%                            2275.000000   
-    50%                            3871.500000   
-    75%                            6477.000000   
-    max                           15088.000000   
-    
-           Fossil Hard coal - Actual Aggregated [MW]  \
-    count                              271292.000000   
-    mean                                 7061.014523   
-    std                                  4312.138519   
-    min                                   661.000000   
-    25%                                  3221.000000   
-    50%                                  6358.000000   
-    75%                                 10369.000000   
-    max                                 19267.000000   
-    
-           Fossil Oil - Actual Aggregated [MW]  \
-    count                        271292.000000   
-    mean                            295.524055   
-    std                             146.381936   
-    min                               0.000000   
-    25%                             195.000000   
-    50%                             277.000000   
-    75%                             436.000000   
-    max                            1197.000000   
-    
-           Fossil Oil shale - Actual Aggregated [MW]  \
-    count                                        0.0   
-    mean                                         NaN   
-    std                                          NaN   
-    min                                          NaN   
-    25%                                          NaN   
-    50%                                          NaN   
-    75%                                          NaN   
-    max                                          NaN   
-    
-           Fossil Peat - Actual Aggregated [MW]  \
-    count                                   0.0   
-    mean                                    NaN   
-    std                                     NaN   
-    min                                     NaN   
-    25%                                     NaN   
-    50%                                     NaN   
-    75%                                     NaN   
-    max                                     NaN   
-    
-           Geothermal - Actual Aggregated [MW]  ...  \
-    count                        271291.000000  ...   
-    mean                             19.848240  ...   
-    std                               5.471195  ...   
-    min                               0.000000  ...   
-    25%                              16.000000  ...   
-    50%                              20.000000  ...   
-    75%                              24.000000  ...   
-    max                              34.000000  ...   
-    
-           Wind Offshore - Actual Aggregated [MW]  \
-    count                           271292.000000   
-    mean                              2191.950968   
-    std                               1726.068489   
-    min                                  0.000000   
-    25%                                661.000000   
-    50%                               1841.000000   
-    75%                               3453.000000   
-    max                               7262.000000   
-    
-           Wind Onshore - Actual Aggregated [MW]    total_power  \
-    count                          271292.000000  271324.000000   
-    mean                             9941.931111   61241.999097   
-    std                              8294.243058   10550.319608   
-    min                                73.000000       0.000000   
-    25%                              3676.000000   53682.000000   
-    50%                              7358.000000   61586.500000   
-    75%                             13881.250000   69269.000000   
-    max                             44180.000000   98943.000000   
-    
-           total_fossil_power  total_renewable_power           year  \
-    count       271324.000000          271324.000000  271324.000000   
-    mean         25133.150138           23234.396611    2018.380711   
-    std           8106.140661           10253.096545       2.235444   
-    min              0.000000               0.000000    2015.000000   
-    25%          19423.000000           14995.000000    2016.000000   
-    50%          25187.000000           20995.000000    2018.000000   
-    75%          30702.000000           29775.000000    2020.000000   
-    max          48599.000000           68113.000000    2022.000000   
-    
-                   month    day_in_year    day_of_week    hours_a_day  
-    count  271324.000000  271324.000000  271324.000000  271324.000000  
-    mean        6.857043     179.067911       3.496122      11.874020  
-    std         3.416615     104.092274       2.021059       6.928155  
-    min         1.000000       1.000000       0.000000       0.000000  
-    25%         3.935484      89.312500       1.750000       5.750000  
-    50%         6.833333     177.635417       3.500000      11.750000  
-    75%         9.700000     265.958333       5.250000      17.750000  
-    max        12.967742     366.989583       6.989583      23.750000  
-    
-    [8 rows x 30 columns]
+                    YEAR  Biomass - Actual Aggregated [MW]  Fossil Brown coal/Lignite - Actual Aggregated [MW]  Fossil Coal-derived gas - Actual Aggregated [MW]  Fossil Gas - Actual Aggregated [MW]  Fossil Hard coal - Actual Aggregated [MW]  Fossil Oil - Actual Aggregated [MW]  Fossil Oil shale - Actual Aggregated [MW]  Fossil Peat - Actual Aggregated [MW]  Geothermal - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Consumption [MW]  Hydro Run-of-river and poundage - Actual Aggregated [MW]  Hydro Water Reservoir - Actual Aggregated [MW]  Marine - Actual Aggregated [MW]  Nuclear - Actual Aggregated [MW]  Other - Actual Aggregated [MW]  Other renewable - Actual Aggregated [MW]  Solar - Actual Aggregated [MW]  Waste - Actual Aggregated [MW]  Wind Offshore - Actual Aggregated [MW]  Wind Onshore - Actual Aggregated [MW]    total_power  total_fossil_power  total_renewable_power           year          month    day_in_year    day_of_week    hours_a_day
+    count  271324.000000                     271292.000000                                      271292.000000                                      161180.000000                        271292.000000                              271292.000000                        271292.000000                                        0.0                                   0.0                        271291.000000                                  271292.000000                                   271292.000000                                      271292.000000                                          271292.000000                              0.0                     271292.000000                   271292.000000                             271292.000000                   271292.000000                   271292.000000                           271292.000000                          271292.000000  271324.000000       271324.000000          271324.000000  271324.000000  271324.000000  271324.000000  271324.000000  271324.000000
+    mean     2018.380711                       4424.540702                                       12998.443419                                         354.316181                          4570.626373                                7061.014523                           295.524055                                        NaN                                   NaN                            19.848240                                    1118.701425                                     1132.386377                                        1624.776683                                             110.640314                              NaN                       7818.208322                     2090.242038                                144.553743                     4864.312424                      631.015872                             2191.950968                            9941.931111   61241.999097        25133.150138           23234.396611    2018.380711       6.857043     179.067911       3.496122      11.874020
+    std         2.235444                        355.105745                                        3493.252888                                         172.325799                          2850.303636                                4312.138519                           146.381936                                        NaN                                   NaN                             5.471195                                    1256.254156                                     1332.760954                                         384.207556                                              89.428509                              NaN                       1931.504153                     2585.045226                                 38.171862                     7521.369040                      152.431534                             1726.068489                            8294.243058   10550.319608         8106.140661           10253.096545       2.235444       3.416615     104.092274       2.021059       6.928155
+    min      2015.000000                       3294.000000                                        2851.000000                                           0.000000                           399.000000                                 661.000000                             0.000000                                        NaN                                   NaN                             0.000000                                       0.000000                                        0.000000                                         682.000000                                               0.000000                              NaN                       1984.000000                       21.000000                                 41.000000                        0.000000                       32.000000                                0.000000                              73.000000       0.000000            0.000000               0.000000    2015.000000       1.000000       1.000000       0.000000       0.000000
+    25%      2016.000000                       4154.000000                                       11200.000000                                         294.000000                          2275.000000                                3221.000000                           195.000000                                        NaN                                   NaN                            16.000000                                     209.000000                                       86.000000                                        1338.000000                                              46.000000                              NaN                       6586.000000                      269.000000                                118.000000                        0.000000                      540.000000                              661.000000                            3676.000000   53682.000000        19423.000000           14995.000000    2016.000000       3.935484      89.312500       1.750000       5.750000
+    50%      2018.000000                       4485.000000                                       13751.000000                                         392.000000                          3871.500000                                6358.000000                           277.000000                                        NaN                                   NaN                            20.000000                                     619.000000                                      550.000000                                        1592.000000                                              83.000000                              NaN                       7889.000000                      413.000000                                142.000000                      106.000000                      629.000000                             1841.000000                            7358.000000   61586.500000        25187.000000           20995.000000    2018.000000       6.833333     177.635417       3.500000      11.750000
+    75%      2020.000000                       4713.000000                                       15589.000000                                         480.000000                          6477.000000                               10369.000000                           436.000000                                        NaN                                   NaN                            24.000000                                    1616.000000                                     1855.000000                                        1890.000000                                             147.000000                              NaN                       9229.000000                     3867.000000                                173.000000                     7742.000000                      750.000000                             3453.000000                           13881.250000   69269.000000        30702.000000           29775.000000    2020.000000       9.700000     265.958333       5.250000      17.750000
+    max      2022.000000                       5137.000000                                       19827.000000                                         758.000000                         15088.000000                               19267.000000                          1197.000000                                        NaN                                   NaN                            34.000000                                    8640.000000                                     7968.000000                                        2883.000000                                             638.000000                              NaN                      11474.000000                    32099.000000                                236.000000                    38153.000000                     1009.000000                             7262.000000                           44180.000000   98943.000000        48599.000000           68113.000000    2022.000000      12.967742     366.989583       6.989583      23.750000
     
     
     ====================================================================================================
@@ -1044,137 +680,15 @@ for country in COUNTRIES:
       Columns: 35
     
     Data Overview:
-                   YEAR  Biomass - Actual Aggregated [MW]  \
-    count  76969.000000                      76906.000000   
-    mean    2018.810404                        412.978051   
-    std        2.403026                         86.916096   
-    min     2015.000000                          0.000000   
-    25%     2017.000000                        351.000000   
-    50%     2019.000000                        400.000000   
-    75%     2021.000000                        487.000000   
-    max     2022.000000                        609.000000   
-    
-           Fossil Brown coal/Lignite - Actual Aggregated [MW]  \
-    count                                       76905.000000    
-    mean                                          210.971471    
-    std                                           328.973514    
-    min                                             0.000000    
-    25%                                             0.000000    
-    50%                                             0.000000    
-    75%                                           454.000000    
-    max                                           999.000000    
-    
-           Fossil Coal-derived gas - Actual Aggregated [MW]  \
-    count                                           76906.0   
-    mean                                                0.0   
-    std                                                 0.0   
-    min                                                 0.0   
-    25%                                                 0.0   
-    50%                                                 0.0   
-    75%                                                 0.0   
-    max                                                 0.0   
-    
-           Fossil Gas - Actual Aggregated [MW]  \
-    count                         76907.000000   
-    mean                           7203.489799   
-    std                            3305.133191   
-    min                               0.000000   
-    25%                            4594.000000   
-    50%                            6189.000000   
-    75%                            9224.500000   
-    max                           20454.000000   
-    
-           Fossil Hard coal - Actual Aggregated [MW]  \
-    count                               76906.000000   
-    mean                                 2418.356994   
-    std                                  2194.077272   
-    min                                     0.000000   
-    25%                                   704.000000   
-    50%                                  1292.000000   
-    75%                                  4212.000000   
-    max                                  8359.000000   
-    
-           Fossil Oil - Actual Aggregated [MW]  \
-    count                         76904.000000   
-    mean                            227.548866   
-    std                              91.432171   
-    min                               0.000000   
-    25%                             156.000000   
-    50%                             240.000000   
-    75%                             299.000000   
-    max                             449.000000   
-    
-           Fossil Oil shale - Actual Aggregated [MW]  \
-    count                                    76907.0   
-    mean                                         0.0   
-    std                                          0.0   
-    min                                          0.0   
-    25%                                          0.0   
-    50%                                          0.0   
-    75%                                          0.0   
-    max                                          0.0   
-    
-           Fossil Peat - Actual Aggregated [MW]  \
-    count                               76906.0   
-    mean                                    0.0   
-    std                                     0.0   
-    min                                     0.0   
-    25%                                     0.0   
-    50%                                     0.0   
-    75%                                     0.0   
-    max                                     0.0   
-    
-           Geothermal - Actual Aggregated [MW]  ...  \
-    count                              76906.0  ...   
-    mean                                   0.0  ...   
-    std                                    0.0  ...   
-    min                                    0.0  ...   
-    25%                                    0.0  ...   
-    50%                                    0.0  ...   
-    75%                                    0.0  ...   
-    max                                    0.0  ...   
-    
-           Wind Offshore - Actual Aggregated [MW]  \
-    count                                 76906.0   
-    mean                                      0.0   
-    std                                       0.0   
-    min                                       0.0   
-    25%                                       0.0   
-    50%                                       0.0   
-    75%                                       0.0   
-    max                                       0.0   
-    
-           Wind Onshore - Actual Aggregated [MW]   total_power  \
-    count                           76906.000000  76969.000000   
-    mean                             5788.126232  29150.154257   
-    std                              3344.187269   4671.972910   
-    min                                 0.000000      0.000000   
-    25%                              3190.000000  25682.000000   
-    50%                              5160.000000  28960.000000   
-    75%                              7794.000000  32334.000000   
-    max                             19899.000000  44988.000000   
-    
-           total_fossil_power  total_renewable_power          year         month  \
-    count        76969.000000           76969.000000  76969.000000  76969.000000   
-    mean         10052.217542           12350.667996   2018.810404      6.965678   
-    std           3847.121051            4704.106474      2.403026      3.247221   
-    min              0.000000               0.000000   2015.000000      1.000000   
-    25%           6900.000000            8823.000000   2017.000000      4.300000   
-    50%           9712.000000           11746.000000   2019.000000      7.096774   
-    75%          12764.000000           15472.000000   2021.000000      9.466667   
-    max          28085.000000           31853.000000   2022.000000     12.967742   
-    
-            day_in_year   day_of_week   hours_a_day  
-    count  76969.000000  76969.000000  76969.000000  
-    mean     182.315911      3.480276     11.559355  
-    std       98.930949      2.021989      6.924405  
-    min        1.000000      0.000000      0.000000  
-    25%      101.208333      1.718750      5.750000  
-    50%      185.500000      3.489583     11.750000  
-    75%      258.395833      5.250000     17.750000  
-    max      366.958333      6.989583     23.750000  
-    
-    [8 rows x 30 columns]
+                   YEAR  Biomass - Actual Aggregated [MW]  Fossil Brown coal/Lignite - Actual Aggregated [MW]  Fossil Coal-derived gas - Actual Aggregated [MW]  Fossil Gas - Actual Aggregated [MW]  Fossil Hard coal - Actual Aggregated [MW]  Fossil Oil - Actual Aggregated [MW]  Fossil Oil shale - Actual Aggregated [MW]  Fossil Peat - Actual Aggregated [MW]  Geothermal - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Aggregated [MW]  Hydro Pumped Storage - Actual Consumption [MW]  Hydro Run-of-river and poundage - Actual Aggregated [MW]  Hydro Water Reservoir - Actual Aggregated [MW]  Marine - Actual Aggregated [MW]  Nuclear - Actual Aggregated [MW]  Other - Actual Aggregated [MW]  Other renewable - Actual Aggregated [MW]  Solar - Actual Aggregated [MW]  Waste - Actual Aggregated [MW]  Wind Offshore - Actual Aggregated [MW]  Wind Onshore - Actual Aggregated [MW]   total_power  total_fossil_power  total_renewable_power          year         month   day_in_year   day_of_week   hours_a_day
+    count  76969.000000                      76906.000000                                       76905.000000                                            76906.0                         76907.000000                               76906.000000                         76904.000000                                    76907.0                               76906.0                              76906.0                                            0.0                                    76906.000000                                       76904.000000                                           76906.000000                          76905.0                      76907.000000                    76906.000000                              76907.000000                    76905.000000                    76906.000000                                 76906.0                           76906.000000  76969.000000        76969.000000           76969.000000  76969.000000  76969.000000  76969.000000  76969.000000  76969.000000
+    mean    2018.810404                        412.978051                                         210.971471                                                0.0                          7203.489799                                2418.356994                           227.548866                                        0.0                                   0.0                                  0.0                                            NaN                                      513.593400                                         935.899303                                            2346.402959                              0.0                       6340.859766                       51.414415                                 92.558064                     2363.840570                      267.880061                                     0.0                            5788.126232  29150.154257        10052.217542           12350.667996   2018.810404      6.965678    182.315911      3.480276     11.559355
+    std        2.403026                         86.916096                                         328.973514                                                0.0                          3305.133191                                2194.077272                            91.432171                                        0.0                                   0.0                                  0.0                                            NaN                                      795.961583                                         384.606695                                            1717.669362                              0.0                        834.183573                       21.097831                                 13.161869                     3222.985762                       43.612603                                     0.0                            3344.187269   4671.972910         3847.121051            4704.106474      2.403026      3.247221     98.930949      2.021989      6.924405
+    min     2015.000000                          0.000000                                           0.000000                                                0.0                             0.000000                                   0.000000                             0.000000                                        0.0                                   0.0                                  0.0                                            NaN                                        0.000000                                           0.000000                                               0.000000                              0.0                          0.000000                        0.000000                                  0.000000                        0.000000                        0.000000                                     0.0                               0.000000      0.000000            0.000000               0.000000   2015.000000      1.000000      1.000000      0.000000      0.000000
+    25%     2017.000000                        351.000000                                           0.000000                                                0.0                          4594.000000                                 704.000000                           156.000000                                        0.0                                   0.0                                  0.0                                            NaN                                        0.000000                                         612.000000                                             968.000000                              0.0                       5957.000000                       44.000000                                 85.000000                       86.000000                      240.000000                                     0.0                            3190.000000  25682.000000         6900.000000            8823.000000   2017.000000      4.300000    101.208333      1.718750      5.750000
+    50%     2019.000000                        400.000000                                           0.000000                                                0.0                          6189.000000                                1292.000000                           240.000000                                        0.0                                   0.0                                  0.0                                            NaN                                      109.000000                                         858.000000                                            1867.000000                              0.0                       6859.000000                       55.000000                                 95.000000                      667.000000                      274.000000                                     0.0                            5160.000000  28960.000000         9712.000000           11746.000000   2019.000000      7.096774    185.500000      3.489583     11.750000
+    75%     2021.000000                        487.000000                                         454.000000                                                0.0                          9224.500000                                4212.000000                           299.000000                                        0.0                                   0.0                                  0.0                                            NaN                                      729.000000                                        1200.000000                                            3313.000000                              0.0                       6991.000000                       60.000000                                102.000000                     3775.000000                      303.000000                                     0.0                            7794.000000  32334.000000        12764.000000           15472.000000   2021.000000      9.466667    258.395833      5.250000     17.750000
+    max     2022.000000                        609.000000                                         999.000000                                                0.0                         20454.000000                                8359.000000                           449.000000                                        0.0                                   0.0                                  0.0                                            NaN                                     4558.000000                                        2000.000000                                            9975.000000                              0.0                       7136.000000                      106.000000                                131.000000                    14314.000000                      357.000000                                     0.0                           19899.000000  44988.000000        28085.000000           31853.000000   2022.000000     12.967742    366.958333      6.989583     23.750000
 
 
 ### 2.1.1.6 Dataset overview
@@ -1520,314 +1034,246 @@ for country, df in dataframes:
     
     NaN Report for Italy:
     --------------------------------------------------------------------------------
-                                                   column    dtype  is_numeric  \
-    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True   
-    10               Fossil Peat - Actual Aggregated [MW]  float64        True   
-    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True   
-    16                    Marine - Actual Aggregated [MW]  float64        True   
-    19           Other renewable - Actual Aggregated [MW]  float64        True   
-    17                   Nuclear - Actual Aggregated [MW]  float64        True   
-    22             Wind Offshore - Actual Aggregated [MW]  float64        True   
-    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True   
-    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True   
-    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True   
-    18                     Other - Actual Aggregated [MW]  float64        True   
-    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True   
-    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True   
-    20                     Solar - Actual Aggregated [MW]  float64        True   
-    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True   
-    11                Geothermal - Actual Aggregated [MW]  float64        True   
-    6                 Fossil Gas - Actual Aggregated [MW]  float64        True   
-    8                 Fossil Oil - Actual Aggregated [MW]  float64        True   
-    3                    Biomass - Actual Aggregated [MW]  float64        True   
-    23              Wind Onshore - Actual Aggregated [MW]  float64        True   
-    21                     Waste - Actual Aggregated [MW]  float64        True   
-    0                                                Area   object       False   
-    1                                                 MTU   object       False   
-    2                                                YEAR    int64        True   
-    24                                        total_power  float64        True   
-    25                                 total_fossil_power  float64        True   
-    26                              total_renewable_power  float64        True   
-    27                                               year    int32        True   
-    28                                              month  float64        True   
-    29                                        day_in_year  float64        True   
-    30                                        day_of_week  float64        True   
-    31                                             season   object       False   
-    32                                          month_str   object       False   
-    33                                    day_of_week_str   object       False   
-    34                                        hours_a_day  float64        True   
-    
-        na_count  na_percent                                 example_na_indices  
-    9      59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    10     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    4      59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    16     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    19     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    17     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    22     56125       95.01  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...  
-    13     17314       29.31  [2016-01-01 17:00:00, 2016-01-01 18:00:00, 201...  
-    12      1507        2.55  [2016-01-11 02:00:00, 2016-01-11 03:00:00, 201...  
-    5        575        0.97  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    18       311        0.53  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    7        119        0.20  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    15        47        0.08  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    20        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    14        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    11        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    6         23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    8         23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    3         23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    23        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    21        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...  
-    0          0        0.00                                                 []  
-    1          0        0.00                                                 []  
-    2          0        0.00                                                 []  
-    24         0        0.00                                                 []  
-    25         0        0.00                                                 []  
-    26         0        0.00                                                 []  
-    27         0        0.00                                                 []  
-    28         0        0.00                                                 []  
-    29         0        0.00                                                 []  
-    30         0        0.00                                                 []  
-    31         0        0.00                                                 []  
-    32         0        0.00                                                 []  
-    33         0        0.00                                                 []  
-    34         0        0.00                                                 []  
+                                                   column    dtype  is_numeric  na_count  na_percent                                 example_na_indices
+    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    10               Fossil Peat - Actual Aggregated [MW]  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    16                    Marine - Actual Aggregated [MW]  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    19           Other renewable - Actual Aggregated [MW]  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    17                   Nuclear - Actual Aggregated [MW]  float64        True     59070      100.00  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    22             Wind Offshore - Actual Aggregated [MW]  float64        True     56125       95.01  [2016-01-01 00:00:00, 2016-01-01 01:00:00, 201...
+    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True     17314       29.31  [2016-01-01 17:00:00, 2016-01-01 18:00:00, 201...
+    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True      1507        2.55  [2016-01-11 02:00:00, 2016-01-11 03:00:00, 201...
+    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True       575        0.97  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    18                     Other - Actual Aggregated [MW]  float64        True       311        0.53  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True       119        0.20  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True        47        0.08  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    20                     Solar - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    11                Geothermal - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    6                 Fossil Gas - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    8                 Fossil Oil - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    3                    Biomass - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    23              Wind Onshore - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    21                     Waste - Actual Aggregated [MW]  float64        True        23        0.04  [2016-03-27 02:00:00, 2017-03-26 02:00:00, 201...
+    0                                                Area   object       False         0        0.00                                                 []
+    1                                                 MTU   object       False         0        0.00                                                 []
+    2                                                YEAR    int64        True         0        0.00                                                 []
+    24                                        total_power  float64        True         0        0.00                                                 []
+    25                                 total_fossil_power  float64        True         0        0.00                                                 []
+    26                              total_renewable_power  float64        True         0        0.00                                                 []
+    27                                               year    int32        True         0        0.00                                                 []
+    28                                              month  float64        True         0        0.00                                                 []
+    29                                        day_in_year  float64        True         0        0.00                                                 []
+    30                                        day_of_week  float64        True         0        0.00                                                 []
+    31                                             season   object       False         0        0.00                                                 []
+    32                                          month_str   object       False         0        0.00                                                 []
+    33                                    day_of_week_str   object       False         0        0.00                                                 []
+    34                                        hours_a_day  float64        True         0        0.00                                                 []
     ================================================================================
     ================================================================================
     
     NaN Report for France:
     --------------------------------------------------------------------------------
-                                                   column    dtype  is_numeric  \
-    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True   
-    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True   
-    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True   
-    22             Wind Offshore - Actual Aggregated [MW]  float64        True   
-    18                     Other - Actual Aggregated [MW]  float64        True   
-    11                Geothermal - Actual Aggregated [MW]  float64        True   
-    10               Fossil Peat - Actual Aggregated [MW]  float64        True   
-    16                    Marine - Actual Aggregated [MW]  float64        True   
-    19           Other renewable - Actual Aggregated [MW]  float64        True   
-    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True   
-    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True   
-    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True   
-    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True   
-    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True   
-    8                 Fossil Oil - Actual Aggregated [MW]  float64        True   
-    23              Wind Onshore - Actual Aggregated [MW]  float64        True   
-    6                 Fossil Gas - Actual Aggregated [MW]  float64        True   
-    17                   Nuclear - Actual Aggregated [MW]  float64        True   
-    3                    Biomass - Actual Aggregated [MW]  float64        True   
-    21                     Waste - Actual Aggregated [MW]  float64        True   
-    20                     Solar - Actual Aggregated [MW]  float64        True   
-    0                                                Area   object       False   
-    1                                                 MTU   object       False   
-    2                                                YEAR    int64        True   
-    24                                        total_power  float64        True   
-    25                                 total_fossil_power  float64        True   
-    26                              total_renewable_power  float64        True   
-    27                                               year    int32        True   
-    28                                              month  float64        True   
-    29                                        day_in_year  float64        True   
-    30                                        day_of_week  float64        True   
-    31                                             season   object       False   
-    32                                          month_str   object       False   
-    33                                    day_of_week_str   object       False   
-    34                                        hours_a_day  float64        True   
-    
-        na_count  na_percent                                 example_na_indices  
-    9      67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    5      67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    4      67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    22     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    18     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    11     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    10     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    16     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    19     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    13     37960       55.96  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    12     29957       44.16  [2015-02-04 12:00:00, 2015-02-10 00:00:00, 201...  
-    7       3995        5.89  [2015-01-09 21:00:00, 2015-01-09 22:00:00, 201...  
-    15       217        0.32  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...  
-    14        83        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...  
-    8         82        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...  
-    23        82        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...  
-    6         81        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...  
-    17        81        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...  
-    3         80        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...  
-    21        79        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...  
-    20        68        0.10  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...  
-    0          0        0.00                                                 []  
-    1          0        0.00                                                 []  
-    2          0        0.00                                                 []  
-    24         0        0.00                                                 []  
-    25         0        0.00                                                 []  
-    26         0        0.00                                                 []  
-    27         0        0.00                                                 []  
-    28         0        0.00                                                 []  
-    29         0        0.00                                                 []  
-    30         0        0.00                                                 []  
-    31         0        0.00                                                 []  
-    32         0        0.00                                                 []  
-    33         0        0.00                                                 []  
-    34         0        0.00                                                 []  
+                                                   column    dtype  is_numeric  na_count  na_percent                                 example_na_indices
+    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    22             Wind Offshore - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    18                     Other - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    11                Geothermal - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    10               Fossil Peat - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    16                    Marine - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    19           Other renewable - Actual Aggregated [MW]  float64        True     67831      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True     37960       55.96  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True     29957       44.16  [2015-02-04 12:00:00, 2015-02-10 00:00:00, 201...
+    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True      3995        5.89  [2015-01-09 21:00:00, 2015-01-09 22:00:00, 201...
+    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True       217        0.32  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...
+    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True        83        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...
+    8                 Fossil Oil - Actual Aggregated [MW]  float64        True        82        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...
+    23              Wind Onshore - Actual Aggregated [MW]  float64        True        82        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...
+    6                 Fossil Gas - Actual Aggregated [MW]  float64        True        81        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...
+    17                   Nuclear - Actual Aggregated [MW]  float64        True        81        0.12  [2015-03-29 02:00:00, 2015-05-12 17:00:00, 201...
+    3                    Biomass - Actual Aggregated [MW]  float64        True        80        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...
+    21                     Waste - Actual Aggregated [MW]  float64        True        79        0.12  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...
+    20                     Solar - Actual Aggregated [MW]  float64        True        68        0.10  [2015-03-29 02:00:00, 2015-09-11 09:00:00, 201...
+    0                                                Area   object       False         0        0.00                                                 []
+    1                                                 MTU   object       False         0        0.00                                                 []
+    2                                                YEAR    int64        True         0        0.00                                                 []
+    24                                        total_power  float64        True         0        0.00                                                 []
+    25                                 total_fossil_power  float64        True         0        0.00                                                 []
+    26                              total_renewable_power  float64        True         0        0.00                                                 []
+    27                                               year    int32        True         0        0.00                                                 []
+    28                                              month  float64        True         0        0.00                                                 []
+    29                                        day_in_year  float64        True         0        0.00                                                 []
+    30                                        day_of_week  float64        True         0        0.00                                                 []
+    31                                             season   object       False         0        0.00                                                 []
+    32                                          month_str   object       False         0        0.00                                                 []
+    33                                    day_of_week_str   object       False         0        0.00                                                 []
+    34                                        hours_a_day  float64        True         0        0.00                                                 []
     ================================================================================
     ================================================================================
     
     NaN Report for Germany:
     --------------------------------------------------------------------------------
-                                                   column    dtype  is_numeric  \
-    16                    Marine - Actual Aggregated [MW]  float64        True   
-    10               Fossil Peat - Actual Aggregated [MW]  float64        True   
-    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True   
-    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True   
-    11                Geothermal - Actual Aggregated [MW]  float64        True   
-    21                     Waste - Actual Aggregated [MW]  float64        True   
-    20                     Solar - Actual Aggregated [MW]  float64        True   
-    19           Other renewable - Actual Aggregated [MW]  float64        True   
-    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True   
-    6                 Fossil Gas - Actual Aggregated [MW]  float64        True   
-    3                    Biomass - Actual Aggregated [MW]  float64        True   
-    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True   
-    8                 Fossil Oil - Actual Aggregated [MW]  float64        True   
-    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True   
-    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True   
-    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True   
-    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True   
-    17                   Nuclear - Actual Aggregated [MW]  float64        True   
-    18                     Other - Actual Aggregated [MW]  float64        True   
-    23              Wind Onshore - Actual Aggregated [MW]  float64        True   
-    22             Wind Offshore - Actual Aggregated [MW]  float64        True   
-    0                                                Area   object       False   
-    1                                                 MTU   object       False   
-    2                                                YEAR    int64        True   
-    24                                        total_power  float64        True   
-    25                                 total_fossil_power  float64        True   
-    26                              total_renewable_power  float64        True   
-    27                                               year    int32        True   
-    28                                              month  float64        True   
-    29                                        day_in_year  float64        True   
-    30                                        day_of_week  float64        True   
-    31                                             season   object       False   
-    32                                          month_str   object       False   
-    33                                    day_of_week_str   object       False   
-    34                                        hours_a_day  float64        True   
-    
-        na_count  na_percent                                 example_na_indices  
-    16    271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...  
-    10    271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...  
-    9     271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...  
-    5     110144       40.60  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    11        33        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    21        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    20        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    19        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    4         32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    6         32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    3         32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    7         32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    8         32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    13        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    12        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    14        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    15        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    17        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    18        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    23        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    22        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...  
-    0          0        0.00                                                 []  
-    1          0        0.00                                                 []  
-    2          0        0.00                                                 []  
-    24         0        0.00                                                 []  
-    25         0        0.00                                                 []  
-    26         0        0.00                                                 []  
-    27         0        0.00                                                 []  
-    28         0        0.00                                                 []  
-    29         0        0.00                                                 []  
-    30         0        0.00                                                 []  
-    31         0        0.00                                                 []  
-    32         0        0.00                                                 []  
-    33         0        0.00                                                 []  
-    34         0        0.00                                                 []  
+                                                   column    dtype  is_numeric  na_count  na_percent                                 example_na_indices
+    16                    Marine - Actual Aggregated [MW]  float64        True    271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...
+    10               Fossil Peat - Actual Aggregated [MW]  float64        True    271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...
+    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True    271324      100.00  [2015-01-01 00:00:00, 2015-01-01 00:15:00, 201...
+    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True    110144       40.60  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    11                Geothermal - Actual Aggregated [MW]  float64        True        33        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    21                     Waste - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    20                     Solar - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    19           Other renewable - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    6                 Fossil Gas - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    3                    Biomass - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    8                 Fossil Oil - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    17                   Nuclear - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    18                     Other - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    23              Wind Onshore - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    22             Wind Offshore - Actual Aggregated [MW]  float64        True        32        0.01  [2015-03-29 02:00:00, 2015-03-29 02:15:00, 201...
+    0                                                Area   object       False         0        0.00                                                 []
+    1                                                 MTU   object       False         0        0.00                                                 []
+    2                                                YEAR    int64        True         0        0.00                                                 []
+    24                                        total_power  float64        True         0        0.00                                                 []
+    25                                 total_fossil_power  float64        True         0        0.00                                                 []
+    26                              total_renewable_power  float64        True         0        0.00                                                 []
+    27                                               year    int32        True         0        0.00                                                 []
+    28                                              month  float64        True         0        0.00                                                 []
+    29                                        day_in_year  float64        True         0        0.00                                                 []
+    30                                        day_of_week  float64        True         0        0.00                                                 []
+    31                                             season   object       False         0        0.00                                                 []
+    32                                          month_str   object       False         0        0.00                                                 []
+    33                                    day_of_week_str   object       False         0        0.00                                                 []
+    34                                        hours_a_day  float64        True         0        0.00                                                 []
     ================================================================================
     ================================================================================
     
     NaN Report for Spain:
     --------------------------------------------------------------------------------
-                                                   column    dtype  is_numeric  \
-    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True   
-    8                 Fossil Oil - Actual Aggregated [MW]  float64        True   
-    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True   
-    16                    Marine - Actual Aggregated [MW]  float64        True   
-    20                     Solar - Actual Aggregated [MW]  float64        True   
-    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True   
-    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True   
-    23              Wind Onshore - Actual Aggregated [MW]  float64        True   
-    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True   
-    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True   
-    10               Fossil Peat - Actual Aggregated [MW]  float64        True   
-    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True   
-    22             Wind Offshore - Actual Aggregated [MW]  float64        True   
-    21                     Waste - Actual Aggregated [MW]  float64        True   
-    11                Geothermal - Actual Aggregated [MW]  float64        True   
-    18                     Other - Actual Aggregated [MW]  float64        True   
-    3                    Biomass - Actual Aggregated [MW]  float64        True   
-    6                 Fossil Gas - Actual Aggregated [MW]  float64        True   
-    17                   Nuclear - Actual Aggregated [MW]  float64        True   
-    19           Other renewable - Actual Aggregated [MW]  float64        True   
-    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True   
-    0                                                Area   object       False   
-    1                                                 MTU   object       False   
-    2                                                YEAR    int64        True   
-    24                                        total_power  float64        True   
-    25                                 total_fossil_power  float64        True   
-    26                              total_renewable_power  float64        True   
-    27                                               year    int32        True   
-    28                                              month  float64        True   
-    29                                        day_in_year  float64        True   
-    30                                        day_of_week  float64        True   
-    31                                             season   object       False   
-    32                                          month_str   object       False   
-    33                                    day_of_week_str   object       False   
-    34                                        hours_a_day  float64        True   
-    
-        na_count  na_percent                                 example_na_indices  
-    12     76969      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...  
-    8         65        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    14        65        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    16        64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    20        64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    4         64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    7         63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    23        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    15        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    5         63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    10        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    13        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    22        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    21        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    11        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    18        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    3         63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    6         62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    17        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    19        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    9         62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...  
-    0          0        0.00                                                 []  
-    1          0        0.00                                                 []  
-    2          0        0.00                                                 []  
-    24         0        0.00                                                 []  
-    25         0        0.00                                                 []  
-    26         0        0.00                                                 []  
-    27         0        0.00                                                 []  
-    28         0        0.00                                                 []  
-    29         0        0.00                                                 []  
-    30         0        0.00                                                 []  
-    31         0        0.00                                                 []  
-    32         0        0.00                                                 []  
-    33         0        0.00                                                 []  
-    34         0        0.00                                                 []  
+                                                   column    dtype  is_numeric  na_count  na_percent                                 example_na_indices
+    12      Hydro Pumped Storage - Actual Aggregated [MW]  float64        True     76969      100.00  [2015-01-01 00:00:00, 2015-01-01 01:00:00, 201...
+    8                 Fossil Oil - Actual Aggregated [MW]  float64        True        65        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    14  Hydro Run-of-river and poundage - Actual Aggre...  float64        True        65        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    16                    Marine - Actual Aggregated [MW]  float64        True        64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    20                     Solar - Actual Aggregated [MW]  float64        True        64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    4   Fossil Brown coal/Lignite - Actual Aggregated ...  float64        True        64        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    7           Fossil Hard coal - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    23              Wind Onshore - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    15     Hydro Water Reservoir - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    5    Fossil Coal-derived gas - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    10               Fossil Peat - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    13     Hydro Pumped Storage - Actual Consumption [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    22             Wind Offshore - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    21                     Waste - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    11                Geothermal - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    18                     Other - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    3                    Biomass - Actual Aggregated [MW]  float64        True        63        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    6                 Fossil Gas - Actual Aggregated [MW]  float64        True        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    17                   Nuclear - Actual Aggregated [MW]  float64        True        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    19           Other renewable - Actual Aggregated [MW]  float64        True        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    9           Fossil Oil shale - Actual Aggregated [MW]  float64        True        62        0.08  [2015-01-19 19:00:00, 2015-01-19 20:00:00, 201...
+    0                                                Area   object       False         0        0.00                                                 []
+    1                                                 MTU   object       False         0        0.00                                                 []
+    2                                                YEAR    int64        True         0        0.00                                                 []
+    24                                        total_power  float64        True         0        0.00                                                 []
+    25                                 total_fossil_power  float64        True         0        0.00                                                 []
+    26                              total_renewable_power  float64        True         0        0.00                                                 []
+    27                                               year    int32        True         0        0.00                                                 []
+    28                                              month  float64        True         0        0.00                                                 []
+    29                                        day_in_year  float64        True         0        0.00                                                 []
+    30                                        day_of_week  float64        True         0        0.00                                                 []
+    31                                             season   object       False         0        0.00                                                 []
+    32                                          month_str   object       False         0        0.00                                                 []
+    33                                    day_of_week_str   object       False         0        0.00                                                 []
+    34                                        hours_a_day  float64        True         0        0.00                                                 []
     ================================================================================
+
+
+
+```python
+def build_nan_summary_table(
+    dataframes: list[tuple[str, pd.DataFrame]],
+    power_column_keywords=("Actual Aggregated", "Actual Consumption"),
+    add_total: bool = True,
+    sort_by_total: bool = True
+):
+    """
+    Build a NaN summary table for power source columns across multiple countries.
+
+    Parameters
+    ----------
+    dataframes : list of (str, pd.DataFrame)
+        List of (country_name, DataFrame)
+    power_column_keywords : tuple
+        Keywords used to identify power-related columns
+    add_total : bool
+        Whether to add a Total_NaNs column
+    sort_by_total : bool
+        Whether to sort by Total_NaNs descending
+
+    Returns
+    -------
+    pd.DataFrame
+        NaN summary table (rows = power sources, columns = countries)
+    """
+
+    nan_counts = {}
+
+    for country, df in dataframes:
+        power_cols = [
+            col for col in df.columns
+            if any(keyword in col for keyword in power_column_keywords)
+        ]
+
+        nan_counts[country] = df[power_cols].isna().sum()
+
+    nan_table = pd.DataFrame(nan_counts).fillna(0).astype(int)
+
+    if add_total:
+        nan_table["Total_NaNs"] = nan_table.sum(axis=1)
+
+    if sort_by_total and "Total_NaNs" in nan_table.columns:
+        nan_table = nan_table.sort_values("Total_NaNs", ascending=False)
+
+    return nan_table
+
+nan_summary_table = build_nan_summary_table(dataframes=dataframes)
+print("\nNaN Summary Table:")
+print(nan_summary_table.to_markdown())
+```
+
+    
+    NaN Summary Table:
+    |                                                          |   Italy |   France |   Germany |   Spain |   Total_NaNs |
+    |:---------------------------------------------------------|--------:|---------:|----------:|--------:|-------------:|
+    | Marine - Actual Aggregated [MW]                          |   59070 |    67831 |    271324 |      64 |       398289 |
+    | Fossil Peat - Actual Aggregated [MW]                     |   59070 |    67831 |    271324 |      63 |       398288 |
+    | Fossil Oil shale - Actual Aggregated [MW]                |   59070 |    67831 |    271324 |      62 |       398287 |
+    | Fossil Coal-derived gas - Actual Aggregated [MW]         |     575 |    67831 |    110144 |      63 |       178613 |
+    | Fossil Brown coal/Lignite - Actual Aggregated [MW]       |   59070 |    67831 |        32 |      64 |       126997 |
+    | Other renewable - Actual Aggregated [MW]                 |   59070 |    67831 |        32 |      62 |       126995 |
+    | Wind Offshore - Actual Aggregated [MW]                   |   56125 |    67831 |        32 |      63 |       124051 |
+    | Hydro Pumped Storage - Actual Aggregated [MW]            |    1507 |    29957 |        32 |   76969 |       108465 |
+    | Other - Actual Aggregated [MW]                           |     311 |    67831 |        32 |      63 |        68237 |
+    | Geothermal - Actual Aggregated [MW]                      |      23 |    67831 |        33 |      63 |        67950 |
+    | Nuclear - Actual Aggregated [MW]                         |   59070 |       81 |        32 |      62 |        59245 |
+    | Hydro Pumped Storage - Actual Consumption [MW]           |   17314 |    37960 |        32 |      63 |        55369 |
+    | Fossil Hard coal - Actual Aggregated [MW]                |     119 |     3995 |        32 |      63 |         4209 |
+    | Hydro Water Reservoir - Actual Aggregated [MW]           |      47 |      217 |        32 |      63 |          359 |
+    | Hydro Run-of-river and poundage - Actual Aggregated [MW] |      23 |       83 |        32 |      65 |          203 |
+    | Fossil Oil - Actual Aggregated [MW]                      |      23 |       82 |        32 |      65 |          202 |
+    | Wind Onshore - Actual Aggregated [MW]                    |      23 |       82 |        32 |      63 |          200 |
+    | Fossil Gas - Actual Aggregated [MW]                      |      23 |       81 |        32 |      62 |          198 |
+    | Biomass - Actual Aggregated [MW]                         |      23 |       80 |        32 |      63 |          198 |
+    | Waste - Actual Aggregated [MW]                           |      23 |       79 |        32 |      63 |          197 |
+    | Solar - Actual Aggregated [MW]                           |      23 |       68 |        32 |      64 |          187 |
 
 
 
@@ -2644,10 +2090,10 @@ analyze_data_quality_combined(dataframes)
 
     
     ================================================================================
-    COMBINED DATA QUALITY ANALYSIS (ALL COUNTRIES)
+    Original data quality analysis
     ================================================================================
     
-    [0] Checking Dataset Time Ranges...
+    check time range
             Start Date            End Date  Total Days
     Country                                           
     Italy   2016-01-01 2022-09-26 23:00:00        2460
@@ -2655,25 +2101,25 @@ analyze_data_quality_combined(dataframes)
     Germany 2015-01-01 2022-09-26 23:45:00        2825
     Spain   2015-01-01 2022-09-26 23:45:00        2825
     
-    [1] Generating Combined Missingness diagramm...
+    missingness diagram
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_20_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_21_1.png)
     
 
 
     
-    [2] Generating Combined Timestamp Gap Analysis...
-    ✓ No timestamp gaps found.
+    combined timestamp gap analysis
+    No timestamp gaps found! (not regarding the different start dates)
     
-    [3] Generating Combined Outlier Analysis (All Power Sources)...
+    combined outlier analysis (all power sources)
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_20_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_21_3.png)
     
 
 
@@ -2683,21 +2129,8 @@ analyze_data_quality_combined(dataframes)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_20_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_21_5.png)
     
-
-
-    
-    ================================================================================
-    FINAL DATA QUALITY REPORT SUMMARY
-    ================================================================================
-             Missing Values (Cells)  Missing %  Timestamp Gaps (>1h)  Duplicate Rows  Negative Values  Total Power Outliers
-    Country                                                                                                                
-    Italy                    430602    20.8277                     0               6                0                    23
-    France                   683244    28.7793                     0               7                0                    92
-    Germany                  924661     9.7370                     0              28                0                   130
-    Spain                     78232     2.9040                     0               7                0                   143
-    ================================================================================
 
 
 ### 2.1.4 Data preprocessing pipeline (cleaning steps, handling missing data, outliers strategy, resampling or alignment if needed, feature engineering basics) (20 points)
@@ -2706,13 +2139,6 @@ analyze_data_quality_combined(dataframes)
 
 
 ```python
-# dataframes = [
-#     ("Italy", df_italy),
-#     ("France", df_france),
-#     ("Germany", df_germany),
-#     ("Spain", df_spain)
-# ]
-
 
 def plot_hexbin_power_by_state_and_type(
     dataframes: list[tuple[str, pd.DataFrame]],
@@ -2793,22 +2219,14 @@ def plot_hexbin_power_by_state_and_type(
     #     Columns.Power.SOLAR,
     #     Columns.Power.WIND_ONSHORE,
 
-plot_hexbin_power_by_state_and_type(
-    dataframes=dataframes,
-    power_columns=Columns.Power.ALL,
-    gridsize=50
-)
+# plot_hexbin_power_by_state_and_type(
+#     dataframes=dataframes,
+#     power_columns=Columns.Power.ALL,
+#     gridsize=50
+# )
+
+# Deactivated due to github html-oversize and not necessary.
 ```
-
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-      plt.tight_layout()
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_22_1.png)
-    
-
 
 #### 2.1.4.2 Hexbin Plots from Raw Data - column filtered - Hours of the day
 
@@ -2818,18 +2236,18 @@ Power sources not available for at least have of the countries are removed.
 ```python
 plot_hexbin_power_by_state_and_type(
     dataframes=dataframes,
-    power_columns=Columns.Power.ALL_FILT,
+    power_columns=Columns.Power.ALL_FILT+ [Columns.CALC.TOTAL_POWER],
     gridsize=50
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_24_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_25_1.png)
     
 
 
@@ -2841,20 +2259,20 @@ Hexplots are created for  which show the power production over the days of the w
 ```python
 plot_hexbin_power_by_state_and_type(
     dataframes=dataframes,
-    power_columns=Columns.Power.ALL_FILT,
+    power_columns=Columns.Power.ALL_FILT + [Columns.CALC.TOTAL_POWER],
     gridsize=50,
     TimeAxis=Columns.AXIS.DAY_OF_WEEK,
     TimeAxisLabel="Day of Week"
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_26_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_27_1.png)
     
 
 
@@ -2871,20 +2289,20 @@ Hexplots are created for  which show the power production over the days of the y
 ```python
 plot_hexbin_power_by_state_and_type(
     dataframes=dataframes,
-    power_columns=Columns.Power.ALL_FILT,
+    power_columns=Columns.Power.ALL_FILT+ [Columns.CALC.TOTAL_POWER],
     gridsize=50,
     TimeAxis=Columns.AXIS.DAY_OF_YEAR,
     TimeAxisLabel="Day of Year"
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\1892899849.py:79: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_29_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_30_1.png)
     
 
 
@@ -3143,8 +2561,9 @@ def plot_filter_diagnostics_scatter(
     )
 
     plt.xlabel(x_col)
-    plt.ylabel(y_col)
+    #plt.ylabel(y_col)
     plt.title(title or f"Filter diagnostics: {y_col} vs {x_col}")
+    plt.ylabel("Total Power [MW]")
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
@@ -3199,7 +2618,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_1.png)
     
 
 
@@ -3211,7 +2630,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_3.png)
     
 
 
@@ -3223,7 +2642,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_5.png)
     
 
 
@@ -3235,7 +2654,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_7.png)
     
 
 
@@ -3247,7 +2666,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_9.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_9.png)
     
 
 
@@ -3259,7 +2678,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_11.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_11.png)
     
 
 
@@ -3271,7 +2690,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_13.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_13.png)
     
 
 
@@ -3283,7 +2702,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_15.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_15.png)
     
 
 
@@ -3295,7 +2714,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_17.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_17.png)
     
 
 
@@ -3307,7 +2726,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_19.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_19.png)
     
 
 
@@ -3319,7 +2738,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_21.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_21.png)
     
 
 
@@ -3331,8 +2750,37 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_34_23.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_35_23.png)
     
+
+
+
+```python
+def build_outlier_summary_table(reports: list[dict]) -> pd.DataFrame:
+    rows = []
+
+    for report in reports:
+        row = {
+            "Country": report["state"],
+            **report["summary"]
+        }
+        rows.append(row)
+
+    return pd.DataFrame(rows).set_index("Country")
+
+outlier_summary_table = build_outlier_summary_table(reports)
+print("\nOutlier Removal Summary Table:")
+print(outlier_summary_table.to_markdown())
+```
+
+    
+    Outlier Removal Summary Table:
+    | Country   |   rows_before |   rows_after |   rows_removed |   rows_removed_pct |
+    |:----------|--------------:|-------------:|---------------:|-------------------:|
+    | Italy     |         59070 |        59047 |             23 |          0.0389369 |
+    | France    |         67831 |        67748 |             83 |          0.122363  |
+    | Germany   |        271324 |       271292 |             32 |          0.011794  |
+    | Spain     |         76969 |        76900 |             69 |          0.0896465 |
 
 
 #### 2.1.4.5 Plot of raw data of a country over whole time range
@@ -3381,7 +2829,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_0.png)
     
 
 
@@ -3390,7 +2838,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_2.png)
     
 
 
@@ -3399,7 +2847,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_4.png)
     
 
 
@@ -3408,7 +2856,7 @@ for country, df in dataframes:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_37_6.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_39_6.png)
     
 
 
@@ -3487,7 +2935,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_1.png)
     
 
 
@@ -3497,7 +2945,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_3.png)
     
 
 
@@ -3507,7 +2955,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_5.png)
     
 
 
@@ -3517,7 +2965,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_40_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_42_7.png)
     
 
 
@@ -3593,25 +3041,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_43_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_3.png)
     
 
 
@@ -3680,25 +3128,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_44_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_3.png)
     
 
 
@@ -3767,25 +3215,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_45_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_47_3.png)
     
 
 
@@ -3895,7 +3343,7 @@ plot_total_power_scatter(dataframes_filtered)
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_46_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_0.png)
     
 
 
@@ -3942,25 +3390,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_50_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_50_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_50_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_48_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_50_3.png)
     
 
 
@@ -4069,25 +3517,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_54_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_54_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_54_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_52_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_54_3.png)
     
 
 
@@ -4289,14 +3737,13 @@ plot_distribution_all_sources(dataframes_filtered)
 
     
     ================================================================================
-    B.2 DETAILED DISTRIBUTION ANALYSIS (ZOOMED - OUTLIERS CUT)
+    2.2.2 Distribution analysis
     ================================================================================
-    Generating 17 distribution plots (zoomed)...
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_60_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_62_1.png)
     
 
 
@@ -4451,7 +3898,7 @@ def analyze_correlations_standard(dataframes_list):
             square=True, 
             linewidths=0.5, 
             ax=axes[0],
-            annot_kws={"size": 10})
+            annot_kws={"size": 9})
         axes[0].set_title(f"{country} - Pearson (Linear)", fontsize=16, fontweight='bold', pad=15)
         axes[0].tick_params(axis='both', which='major', labelsize=11)
         
@@ -4467,7 +3914,7 @@ def analyze_correlations_standard(dataframes_list):
             square=True,
             linewidths=0.5, 
             ax=axes[1],
-            annot_kws={"size": 10})
+            annot_kws={"size": 9})
         axes[1].set_title(f"{country} - Spearman (Rank Order)", fontsize=16, fontweight='bold', pad=15)
         axes[1].tick_params(axis='both', which='major', labelsize=11)
         
@@ -4480,54 +3927,39 @@ analyze_correlations_standard(dataframes_filtered)
 
     
     ================================================================================
-    B.3 CORRELATION ANALYSIS (SHORT LABELS)
+    2.2.3 CORRELATION ANALYSIS
     ================================================================================
-    
-    Analyzing Italy...
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_1.png)
     
-
-
-    
-    Analyzing France...
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_2.png)
     
-
-
-    
-    Analyzing Germany...
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_3.png)
     
-
-
-    
-    Analyzing Spain...
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_63_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_4.png)
     
 
 
 ### 2.2.4 Daily or periodic pattern analysis 
 
-1. day-of-week
-2. hour-of-day
-3. seasonality indicators
-4. test-cycle patterns
+day-of-week
+hour-of-day
+seasonality indicators
 
 
 ```python
@@ -4541,7 +3973,6 @@ def analyze_periodic_patterns(dataframes_list):
     # iteration through all countries
     for country, df in dataframes_list:
         if TARGET not in df.columns: continue
-        print(f"{country}:")
 
         # copy the data and prepareing it for plotting
         pdf = df[[TARGET]].copy()
@@ -4624,45 +4055,35 @@ analyze_periodic_patterns(dataframes_filtered)
     ================================================================================
     2.2.4 PERIODIC PATTERN ANALYSIS
     ================================================================================
-    Italy:
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_67_1.png)
     
-
-
-    France:
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_67_2.png)
     
-
-
-    Germany:
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_5.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_67_3.png)
     
-
-
-    Spain:
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_65_7.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_67_4.png)
     
 
 
 ### 2.2.5 Summary of observed patterns
 
-#### [ITALY] 
+#### ITALY
 
 1. Significant consumption drop on Weekends (>5%).
    -> [TRUE]
@@ -4681,7 +4102,7 @@ analyze_periodic_patterns(dataframes_filtered)
 
 ------------------------------------------------------------
 
-#### [FRANCE]
+#### FRANCE
 
 1. Significant consumption drop on Weekends (>5%).
    -> [TRUE]
@@ -4699,7 +4120,7 @@ analyze_periodic_patterns(dataframes_filtered)
 
 ------------------------------------------------------------
 
-#### [GERMANY]
+#### GERMANY
 
 1. Significant consumption drop on Weekends (>5%)
    -> [TRUE]
@@ -4717,7 +4138,7 @@ analyze_periodic_patterns(dataframes_filtered)
 
 ------------------------------------------------------------
 
-#### [SPAIN]
+#### SPAIN
 
 1. Significant consumption drop on Weekends (>5%).
    -> [TRUE] 
@@ -4847,247 +4268,15 @@ plot_cross_tab_heatmaps_2x2(
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_69_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_0.png)
     
 
+
+### 2.3.1. Threshold-based probability estimation for events (define event, justify threshold, compute empirical probability) (15 points)
 
 
 ```python
-def demonstrate_lln(dataframes_list):
-    print(f"\n{'='*80}")
-    print("2.4.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS ")
-    print(f"{'='*80}")
-    
-    TARGET = Columns.CALC.TOTAL_POWER
-
-    # grid setup
-    n_cols = 2
-    n_rows = (len(dataframes_list) + n_cols - 1) // n_cols
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(20, 6 * n_rows))
-    axes = axes.flatten()
-
-    for i, (country, df) in enumerate(dataframes_list):
-        ax = axes[i]
-        
-        if TARGET not in df.columns:
-            ax.text(0.5, 0.5, "Data Missing", ha='center')
-            continue
-
-        # calculate mean
-        # (line to converge to)
-        population_data = df[TARGET].dropna()
-        true_mean = population_data.mean()
-        
-        # simulate the random sampling
-        #   the data neets to be shuffeled!
-        #   if it starts in the morning the first values are to low and then the data isnt convergeing right.
-        shuffled_samples = population_data.sample(frac=1, random_state=42).values
-        
-        # 3. calculating the cumulative mean
-        #    mean of the first value, the first two, three and so on
-        #    1/1 (1+2)/2 (1+2+3)/3 (1+2+3+4)/4
-        cumulative_sum = np.cumsum(shuffled_samples)
-        #    divide by 1,2,3,4,5.....
-        sample_sizes = np.arange(1, len(shuffled_samples) + 1)
-        running_means = cumulative_sum / sample_sizes
-        
-        # fix:  plot only the start to see the results
-        #       else there are too many values to see it converge!
-        limit_n = 5000 
-        
-        # plot the calculated mean ( 1/1 (1+2)/2 (1+2+3)/3 ....)
-        ax.plot(sample_sizes[:limit_n],     # added limit
-                running_means[:limit_n],    # added limit
-                color=colors[country], 
-                linewidth=1.5, 
-                alpha=0.8, 
-                label='Sample Mean')
-        
-        # plot the mean line in red, where the data should be convergeint
-        ax.axhline(true_mean, 
-                   color='black', 
-                   linestyle='--', 
-                   linewidth=2, 
-                   label=f'True Mean ({true_mean:.0f} MW)')
-        
-        # format the graph for better visibility
-        ax.set_title(f"{country}: Convergence to True Mean", fontsize=12, fontweight='bold')
-        ax.set_xlabel("Sample Size (n)")
-        ax.set_ylabel("Calculated Mean [MW]")
-        ax.legend(loc='upper right')
-        ax.grid(True, linestyle=':', alpha=0.6)
-        
-        # Add text verification
-        # compare mean at n=10 vs n=5000
-        mean_10 = running_means[9]
-        mean_5000 = running_means[limit_n-1]
-
-        # for visibility measure the error at 10 samples and 5000 samples to see the converge
-        error_10 = abs(mean_10 - true_mean)
-        error_5000 = abs(mean_5000 - true_mean)
-        stats_text = (f"Error at n=10:   {error_10:.1f} MW\n"
-                      f"Error at n=5000: {error_5000:.1f} MW")
-        
-        ax.text(0.5, 0.1, stats_text, transform=ax.transAxes, 
-                fontsize=10, bbox=dict(facecolor='white', alpha=0.8, edgecolor='gray'))
-
-    # hide empty subplots if neccesary
-    for j in range(i + 1, len(axes)):
-        axes[j].set_visible(False)
-        
-    plt.tight_layout()
-    plt.show()
-
-    print("\n INTERPRETATION:")
-    print(" - The jagged line starts wildly volatile because 'n' is small (small sample size).")
-    print(" - As 'n' increases (moving right), the colored line flattens and is getting closer to the true mean.")
-    print(" - This proves larger datasets yield more reliable statistics.")
-
-# execute
-demonstrate_lln(dataframes_filtered)
-```
-
-    
-    ================================================================================
-    D.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS (LLN)
-    ================================================================================
-    Processing LLN for Italy...
-    Processing LLN for France...
-    Processing LLN for Germany...
-    Processing LLN for Spain...
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_70_1.png)
-    
-
-
-    
-     INTERPRETATION:
-     - The jagged line starts wildly volatile because 'n' is small (small sample size).
-     - As 'n' increases (moving right), the jagged line flattens and hugs the True Mean.
-     - This proves that larger datasets yield more reliable statistics.
-
-
-
-```python
-def demonstrate_clt(dataframes_list):
-    print(f"\n{'='*80}")
-    print("2.4.2  CENTRAL LIMIT THEOREM (CLT)")
-    print(f"{'='*80}")
-
-    TARGET_COL = Columns.CALC.TOTAL_POWER  # Column to analyze
-    NUM_TRIALS = 2000       # repetition times
-    SMALL_N    = 1          # small sample size for comparison(must be smaller than 5)
-    LARGE_N    = 2000       # lagre sample size (smooth)
-    BINS       = 100        # histogramm resolution (bars)
-    # ==========================================
-
-    for country, df in dataframes_list:
-        if TARGET_COL not in df.columns: continue
-        
-        # prepare the data
-        population = df[TARGET_COL].dropna().values
-        true_mean = np.mean(population)
-        
-        # SMALL sample size
-        samples_small = np.random.choice(population, size=(NUM_TRIALS, SMALL_N))
-        means_small = np.mean(samples_small, axis=1)
-        
-        # LARGE sample size
-        samples_large = np.random.choice(population, size=(NUM_TRIALS, LARGE_N))
-        means_large = np.mean(samples_large, axis=1)
-
-        # plot presettings
-        fig, axes = plt.subplots(1, 3, figsize=(20, 5))
-        
-        # LEFT plot the original 
-        sns.histplot(
-            population, 
-            kde=True,               # display the smooth line voer the bars
-            ax=axes[0], 
-            color='gray', 
-            stat='density', 
-            bins=BINS)
-        
-        # settings
-        axes[0].set_title(f"{country}: Original Population", fontweight='bold')
-        axes[0].set_xlabel("Power [MW]")
-        axes[0].text(0.95, 0.95, "Often Irregular\n(Not Normal)", transform=axes[0].transAxes, 
-                     ha='right', va='top', bbox=dict(boxstyle="round", fc="white", alpha=0.8))
-
-        # MIDDLE SMALL sample size
-        sns.histplot(
-            means_small,
-            kde=True,               # display the smooth line voer the bars
-            ax=axes[1], 
-            color=colors[country], 
-            stat='density',         # normlaizes height 
-            bins=BINS)
-        # settings
-      
-        axes[1].set_title(f"Sampling Dist. (N={SMALL_N})", fontweight='bold')
-        axes[1].set_xlabel("Mean Power [MW]")
-        axes[1].axvline(true_mean, color='black', linestyle='--', label='True Mean')
-        axes[1].legend()
-
-        # RIGHT LARGE sample size
-        sns.histplot(
-            means_large, 
-            kde=True,               # display the smooth line voer the bars 
-            ax=axes[2], 
-            color=colors[country], 
-            stat='density',         # normlaizes height  
-            bins=BINS)
-
-        plt.tight_layout()
-        plt.show()
-
-# execute
-demonstrate_clt(dataframes_filtered)
-```
-
-    
-    ================================================================================
-    D.2 STATISTICAL THEORY: CENTRAL LIMIT THEOREM (CLT)
-    ================================================================================
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_1.png)
-    
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_2.png)
-    
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_3.png)
-    
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_71_4.png)
-    
-
-
-## 2.3  C. Probability and Event Analysis (45 points)
-
-1. Threshold-based probability estimation for events (define event, justify threshold, compute empirical probability) (15 points)
-2. Cross tabulation analysis for two variables (10 points)
-3. Conditional probability analysis (at least two meaningful conditional relationships) (15 points)
-4. Summary of observations and limitations (what could bias these estimates, what assumppions were made) (5 points)
-
-
-```python
-def threshold_event_probability(df, state, thresholds, plot=False):
+*-/def threshold_event_probability(df, state, thresholds, plot=False):
     report = {
         "state": state,
         "probabilities": {},
@@ -5464,6 +4653,248 @@ for country, df in dataframes_filtered:
 2. Central Limit Theorem application (sampling distributions, effect of sample size, interpretation) (25 points)
 3. Result interpretation and sanity checks (what would invalidate your conclusion, what you verified) (5 points)
 
+
+```python
+def demonstrate_lln(dataframes_list):
+    print(f"\n{'='*80}")
+    print("2.4.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS ")
+    print(f"{'='*80}")
+    
+    TARGET = Columns.CALC.TOTAL_POWER
+
+    # grid setup
+    n_cols = 2
+    n_rows = (len(dataframes_list) + n_cols - 1) // n_cols
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(20, 6 * n_rows))
+    axes = axes.flatten()
+
+    for i, (country, df) in enumerate(dataframes_list):
+        ax = axes[i]
+        
+        if TARGET not in df.columns:
+            ax.text(0.5, 0.5, "Data Missing", ha='center')
+            continue
+
+        # calculate mean
+        # (line to converge to)
+        population_data = df[TARGET].dropna()
+        true_mean = population_data.mean()
+        
+        # simulate the random sampling
+        #   the data neets to be shuffeled!
+        #   if it starts in the morning the first values are to low and then the data isnt convergeing right.
+        shuffled_samples = population_data.sample(frac=1, random_state=42).values
+        
+        # 3. calculating the cumulative mean
+        #    mean of the first value, the first two, three and so on
+        #    1/1 (1+2)/2 (1+2+3)/3 (1+2+3+4)/4
+        cumulative_sum = np.cumsum(shuffled_samples)
+        #    divide by 1,2,3,4,5.....
+        sample_sizes = np.arange(1, len(shuffled_samples) + 1)
+        running_means = cumulative_sum / sample_sizes
+        
+        # fix:  plot only the start to see the results
+        #       else there are too many values to see it converge!
+        limit_n = 5000 
+        
+        # plot the calculated mean ( 1/1 (1+2)/2 (1+2+3)/3 ....)
+        ax.plot(sample_sizes[:limit_n],     # added limit
+                running_means[:limit_n],    # added limit
+                color=colors[country], 
+                linewidth=1.5, 
+                alpha=0.8, 
+                label='Sample Mean')
+        
+        # plot the mean line in red, where the data should be convergeint
+        ax.axhline(true_mean, 
+                   color='black', 
+                   linestyle='--', 
+                   linewidth=2, 
+                   label=f'True Mean ({true_mean:.0f} MW)')
+        
+        # format the graph for better visibility
+        ax.set_title(f"{country}: Convergence to True Mean", fontsize=12, fontweight='bold')
+        ax.set_xlabel("Sample Size (n)")
+        ax.set_ylabel("Calculated Mean [MW]")
+        ax.legend(loc='upper right')
+        ax.grid(True, linestyle=':', alpha=0.6)
+        
+        # Add text verification
+        # compare mean at n=10 vs n=5000
+        mean_10 = running_means[9]
+        mean_5000 = running_means[limit_n-1]
+
+        # for visibility measure the error at 10 samples and 5000 samples to see the converge
+        error_10 = abs(mean_10 - true_mean)
+        error_5000 = abs(mean_5000 - true_mean)
+        stats_text = (f"Error at n=10:   {error_10:.1f} MW\n"
+                      f"Error at n=5000: {error_5000:.1f} MW")
+        
+        ax.text(0.5, 0.1, stats_text, transform=ax.transAxes, 
+                fontsize=10, bbox=dict(facecolor='white', alpha=0.8, edgecolor='gray'))
+
+    # hide empty subplots if neccesary
+    for j in range(i + 1, len(axes)):
+        axes[j].set_visible(False)
+        
+    plt.tight_layout()
+    plt.show()
+
+    print("\n INTERPRETATION:")
+    print(" - The jagged line starts wildly volatile because 'n' is small (small sample size).")
+    print(" - As 'n' increases (moving right), the colored line flattens and is getting closer to the true mean.")
+    print(" - This proves larger datasets yield more reliable statistics.")
+
+# execute
+demonstrate_lln(dataframes_filtered)
+```
+
+    
+    ================================================================================
+    2.4.1 STATISTICAL THEORY: LAW OF LARGE NUMBERS 
+    ================================================================================
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_76_1.png)
+    
+
+
+    
+     INTERPRETATION:
+     - The jagged line starts wildly volatile because 'n' is small (small sample size).
+     - As 'n' increases (moving right), the colored line flattens and is getting closer to the true mean.
+     - This proves larger datasets yield more reliable statistics.
+
+
+
+```python
+def demonstrate_clt(dataframes_list):
+    print(f"\n{'='*80}")
+    print("2.4.2  CENTRAL LIMIT THEOREM (CLT)")
+    print(f"{'='*80}")
+
+    TARGET_COL = Columns.CALC.TOTAL_POWER  # Column to analyze
+    NUM_TRIALS = 2000       # repetition times
+    SMALL_N    = 1          # small sample size for comparison(must be smaller than 5)
+    LARGE_N    = 2000       # lagre sample size (smooth)
+    BINS       = 100        # histogramm resolution (bars)
+    # ==========================================
+
+    for country, df in dataframes_list:
+        if TARGET_COL not in df.columns: continue
+        
+        # prepare the data
+        population = df[TARGET_COL].dropna().values
+        true_mean = np.mean(population)
+        
+        # SMALL sample size
+        samples_small = np.random.choice(population, size=(NUM_TRIALS, SMALL_N))
+        means_small = np.mean(samples_small, axis=1)
+        
+        # LARGE sample size
+        samples_large = np.random.choice(population, size=(NUM_TRIALS, LARGE_N))
+        means_large = np.mean(samples_large, axis=1)
+
+        # plot presettings
+        fig, axes = plt.subplots(1, 3, figsize=(20, 5))
+        
+        # LEFT plot the original 
+        sns.histplot(
+            population, 
+            kde=True,               # display the smooth line voer the bars
+            ax=axes[0], 
+            color='gray', 
+            stat='density', 
+            bins=BINS)
+        
+        # settings
+        axes[0].set_title(f"{country}: Original Population", fontweight='bold')
+        axes[0].set_xlabel("Power [MW]")
+        axes[0].text(0.95, 0.95, "Often Irregular\n(Not Normal)", transform=axes[0].transAxes, 
+                     ha='right', va='top', bbox=dict(boxstyle="round", fc="white", alpha=0.8))
+
+        # MIDDLE SMALL sample size
+        sns.histplot(
+            means_small,
+            kde=True,               # display the smooth line voer the bars
+            ax=axes[1], 
+            color=colors[country], 
+            stat='density',         # normlaizes height 
+            bins=BINS)
+        # settings
+      
+        axes[1].set_title(f"Sampling Dist. (N={SMALL_N})", fontweight='bold')
+        axes[1].set_xlabel("Mean Power [MW]")
+        axes[1].axvline(true_mean, color='black', linestyle='--', label='True Mean')
+        axes[1].legend()
+
+        # RIGHT LARGE sample size
+        sns.histplot(
+            means_large, 
+            kde=True,               # display the smooth line voer the bars 
+            ax=axes[2], 
+            color=colors[country], 
+            stat='density',         # normlaizes height  
+            bins=BINS)
+
+        axes[2].set_title(f"Sampling Dist. (N={LARGE_N})", fontweight='bold')
+        axes[1].set_xlabel("Mean Power [MW]")
+        axes[2].axvline(true_mean, color='black', linestyle='--', label='True Mean')
+        axes[2].legend()
+
+        plt.tight_layout()
+        plt.show()
+
+# execute
+demonstrate_clt(dataframes_filtered)
+```
+
+    
+    ================================================================================
+    2.4.2  CENTRAL LIMIT THEOREM (CLT)
+    ================================================================================
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_77_1.png)
+    
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_77_2.png)
+    
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_77_3.png)
+    
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_77_4.png)
+    
+
+
+### 2.4.3 Result interpretation and sanity checks (what would invalidate your conclusion, what you
+verified) (5 points)
+
+#### LLN Interpretation
+
+The experiment confirmed that the power generation is highly unstable on an hourly basis. But the long-term average is a stable and deterministic value.
+It demonstrates that a sample size of about 2000 values is required to cancel out the random noise of the chaotic world (like weather, day night cycles) and get a precise estimate of the average
+
+#### CLT Interpretation
+
+Generally the CTL shows, that we can use the normal distribution even on a dataset, which is non-normal (with two peaks)
+At N=2000 no significand deviations of the theorem was observed. The convergence to a bell curve was confirmed despite the underlying data doesn’t have a normal distribution.
+
+
 ## 2.5  E. Regression and Predictive Modeling (45 points)
 
 1. Define a prediction target and features (justify why they make sense) (10 points)
@@ -5556,25 +4987,25 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_1.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_2.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_79_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_82_3.png)
     
 
 
@@ -5700,7 +5131,7 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_0.png)
     
 
 
@@ -5710,33 +5141,33 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_2.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_2.png)
     
 
 
     
     Polynomial model comparison for Italy
     ----------------------------------------
-    Degree 1: R² = 0.2016
-    Degree 2: R² = 0.3996
-    Degree 3: R² = 0.4323
-    Degree 4: R² = 0.4499
-    Degree 5: R² = 0.4799
-    Degree 6: R² = 0.4826
-    Degree 7: R² = 0.4971
-    Degree 8: R² = 0.4971
-    Degree 9: R² = 0.4984
-    Degree 10: R² = 0.4998
-    Degree 11: R² = 0.4998
-    Degree 12: R² = 0.5005
-    Degree 13: R² = 0.5005
-    Degree 14: R² = 0.5005
-    Degree 15: R² = 0.5005
+    Degree 1: R² = 0.2037
+    Degree 2: R² = 0.4022
+    Degree 3: R² = 0.4352
+    Degree 4: R² = 0.4527
+    Degree 5: R² = 0.4828
+    Degree 6: R² = 0.4855
+    Degree 7: R² = 0.5003
+    Degree 8: R² = 0.5003
+    Degree 9: R² = 0.5016
+    Degree 10: R² = 0.5031
+    Degree 11: R² = 0.5031
+    Degree 12: R² = 0.5037
+    Degree 13: R² = 0.5037
+    Degree 14: R² = 0.5037
+    Degree 15: R² = 0.5037
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_4.png)
     
 
 
@@ -5746,33 +5177,33 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_6.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_6.png)
     
 
 
     
     Polynomial model comparison for France
     ----------------------------------------
-    Degree 1: R² = 0.0166
-    Degree 2: R² = 0.0346
-    Degree 3: R² = 0.0378
-    Degree 4: R² = 0.0424
-    Degree 5: R² = 0.0439
-    Degree 6: R² = 0.0447
-    Degree 7: R² = 0.0460
-    Degree 8: R² = 0.0466
-    Degree 9: R² = 0.0466
-    Degree 10: R² = 0.0466
-    Degree 11: R² = 0.0468
-    Degree 12: R² = 0.0471
-    Degree 13: R² = 0.0471
-    Degree 14: R² = 0.0471
-    Degree 15: R² = 0.0471
+    Degree 1: R² = 0.0170
+    Degree 2: R² = 0.0360
+    Degree 3: R² = 0.0393
+    Degree 4: R² = 0.0440
+    Degree 5: R² = 0.0453
+    Degree 6: R² = 0.0463
+    Degree 7: R² = 0.0477
+    Degree 8: R² = 0.0483
+    Degree 9: R² = 0.0483
+    Degree 10: R² = 0.0483
+    Degree 11: R² = 0.0486
+    Degree 12: R² = 0.0488
+    Degree 13: R² = 0.0488
+    Degree 14: R² = 0.0488
+    Degree 15: R² = 0.0488
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_8.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_8.png)
     
 
 
@@ -5782,33 +5213,33 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_10.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_10.png)
     
 
 
     
     Polynomial model comparison for Germany
     ----------------------------------------
-    Degree 1: R² = 0.0439
-    Degree 2: R² = 0.2599
-    Degree 3: R² = 0.2819
-    Degree 4: R² = 0.3308
-    Degree 5: R² = 0.3308
-    Degree 6: R² = 0.3398
-    Degree 7: R² = 0.3402
-    Degree 8: R² = 0.3413
-    Degree 9: R² = 0.3414
-    Degree 10: R² = 0.3414
-    Degree 11: R² = 0.3415
-    Degree 12: R² = 0.3415
-    Degree 13: R² = 0.3417
-    Degree 14: R² = 0.3417
-    Degree 15: R² = 0.3417
+    Degree 1: R² = 0.0437
+    Degree 2: R² = 0.2600
+    Degree 3: R² = 0.2821
+    Degree 4: R² = 0.3310
+    Degree 5: R² = 0.3310
+    Degree 6: R² = 0.3402
+    Degree 7: R² = 0.3406
+    Degree 8: R² = 0.3417
+    Degree 9: R² = 0.3418
+    Degree 10: R² = 0.3418
+    Degree 11: R² = 0.3419
+    Degree 12: R² = 0.3419
+    Degree 13: R² = 0.3421
+    Degree 14: R² = 0.3421
+    Degree 15: R² = 0.3421
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_12.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_12.png)
     
 
 
@@ -5818,28 +5249,28 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_81_14.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_84_14.png)
     
 
 
     
     Polynomial model comparison for Spain
     ----------------------------------------
-    Degree 1: R² = 0.1747
-    Degree 2: R² = 0.2639
-    Degree 3: R² = 0.3278
-    Degree 4: R² = 0.3481
-    Degree 5: R² = 0.3482
-    Degree 6: R² = 0.3558
-    Degree 7: R² = 0.3570
-    Degree 8: R² = 0.3593
-    Degree 9: R² = 0.3594
-    Degree 10: R² = 0.3594
-    Degree 11: R² = 0.3604
-    Degree 12: R² = 0.3604
-    Degree 13: R² = 0.3608
-    Degree 14: R² = 0.3609
-    Degree 15: R² = 0.3608
+    Degree 1: R² = 0.1796
+    Degree 2: R² = 0.2711
+    Degree 3: R² = 0.3370
+    Degree 4: R² = 0.3579
+    Degree 5: R² = 0.3579
+    Degree 6: R² = 0.3659
+    Degree 7: R² = 0.3672
+    Degree 8: R² = 0.3697
+    Degree 9: R² = 0.3698
+    Degree 10: R² = 0.3699
+    Degree 11: R² = 0.3709
+    Degree 12: R² = 0.3709
+    Degree 13: R² = 0.3713
+    Degree 14: R² = 0.3713
+    Degree 15: R² = 0.3713
 
 
 
@@ -5901,28 +5332,24 @@ for country, df in dataframes_filtered:
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_0.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_86_0.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_1.png)
-    
-
-
-    C:\ProgramData\anaconda3\Lib\site-packages\IPython\core\pylabtools.py:170: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-      fig.canvas.print_figure(bytes_io, **kw)
-
-
-
-    
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_3.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_86_1.png)
     
 
 
 
     
-![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_83_4.png)
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_86_2.png)
+    
+
+
+
+    
+![png](Assignment2_HourlyPowerGenerationofEurope_files/Assignment2_HourlyPowerGenerationofEurope_86_3.png)
     
 
