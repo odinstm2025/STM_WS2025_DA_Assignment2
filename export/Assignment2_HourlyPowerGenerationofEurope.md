@@ -590,7 +590,7 @@ for country in COUNTRIES:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3831355117.py:28: DtypeWarning: Columns (6) have mixed types. Specify dtype option on import or set low_memory=False.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\3831355117.py:28: DtypeWarning: Columns (6) have mixed types. Specify dtype option on import or set low_memory=False.
       df = pd.read_csv(filepath)
 
 
@@ -1474,6 +1474,8 @@ for country, df in dataframes:
     ## Time Coverage
     - Start: **2015-01-01 00:00:00**
     - End: **2022-09-26 23:00:00**
+
+
     - Estimated sampling rate: **0 days 01:00:00**
     
     ## Missing Values Summary
@@ -2241,7 +2243,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2266,7 +2268,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2296,7 +2298,7 @@ plot_hexbin_power_by_state_and_type(
 )
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\2212957784.py:71: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
       plt.tight_layout()
 
 
@@ -2929,7 +2931,7 @@ for country, df in dataframes_filtered:
 
 ```
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
@@ -2939,7 +2941,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
@@ -2949,7 +2951,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
@@ -2959,7 +2961,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\3679005691.py:15: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
       df_graph = df_graph.resample("M").mean()
 
 
@@ -4276,7 +4278,7 @@ plot_cross_tab_heatmaps_2x2(
 
 
 ```python
-*-/def threshold_event_probability(df, state, thresholds, plot=False):
+def threshold_event_probability(df, state, thresholds, plot=False):
     report = {
         "state": state,
         "probabilities": {},
@@ -5135,7 +5137,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
@@ -5171,7 +5173,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
@@ -5207,7 +5209,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
@@ -5243,7 +5245,7 @@ for country, df in dataframes_filtered:
     
 
 
-    C:\Users\reosa\AppData\Local\Temp\ipykernel_5340\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
+    C:\Users\reosa\AppData\Local\Temp\ipykernel_15964\105496585.py:32: RankWarning: Polyfit may be poorly conditioned
       coeffs = np.polyfit(x, y, deg)
 
 
